@@ -1,0 +1,18 @@
+aid: subex
+url: https://raw.githubusercontent.com/api-evangelist/subex/refs/heads/main/apis.yml
+apis:
+- aid: subex:subex-api
+  name: Subex Revenue Assurance API
+  tags:
+  - Telecom
+  - Revenue Assurance
+  - Fraud
+  - Analytics
+  image: https://raw.githubusercontent.com/api-evangelist/subex/refs/heads/main/image.png
+  humanURL: https://www.subex.com/
+  baseURL: https://api.subex.example.com
+  properties:
+  - url: https://www.subex.com/
+    type: Documentation
+  description: >-
+    Subex provides revenue assurance and fraud management APIs for telecom operators. APIs enable revenue leakage detection, usage reconciliation, interconnect billing verification, and fraud analytics across voice, data, and digital services.
