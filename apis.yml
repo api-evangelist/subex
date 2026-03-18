@@ -16,3 +16,23 @@ apis:
     type: Documentation
   description: >-
     Subex provides revenue assurance and fraud management APIs for telecom operators. APIs enable revenue leakage detection, usage reconciliation, interconnect billing verification, and fraud analytics across voice, data, and digital services.
+
+common:
+- url: https://www.subex.com/
+  type: Website
+- url: https://www.subex.com/
+  type: Portal
+- url: https://www.subex.com/blog/
+  type: Blog
+- url: https://www.subex.com/contact-us/
+  type: Support
+- url: https://www.subex.com/privacy-policy/
+  type: PrivacyPolicy
+- url: https://www.subex.com/newsroom/
+  type: ChangeLog
+
+maintainers:
+- name: Kin Lane
+  email: kin@apievangelist.com
+
+modified: '2026-03-18'
