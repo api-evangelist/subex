@@ -1,0 +1,163 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.subex.com/schemas/fraud-case",
+  "title": "Subex Fraud Case",
+  "description": "A telecom fraud case detected by Subex ROC fraud analytics",
+  "type": "object",
+  "properties": {
+    "caseId": {
+      "type": "string",
+      "description": "Unique fraud case identifier"
+    },
+    "fraudType": {
+      "type": "string",
+      "enum": ["SIM_SWAP", "BYPASS_FRAUD", "SUBSCRIPTION_FRAUD", "IRSF", "ROAMING_FRAUD", "INTERCONNECT_FRAUD", "WANGIRI"],
+      "description": "Classification of fraud type: SIM_SWAP=unauthorized SIM replacement, BYPASS_FRAUD=traffic bypass to avoid charges, IRSF=International Revenue Share Fraud, WANGIRI=missed call fraud"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["OPEN", "UNDER_INVESTIGATION", "CONFIRMED", "FALSE_POSITIVE", "CLOSED"]
+    },
+    "riskScore": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Fraud risk score from 0 (no risk) to 100 (confirmed fraud)"
+    },
+    "detectedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the fraud was detected"
+    },
+    "subscriberMsisdn": {
+      "type": "string",
+      "description": "Subscriber MSISDN (international format without +)",
+      "pattern": "^\\d{7,15}$"
+    },
+    "imsi": {
+      "type": "string",
+      "description": "IMSI of the subscriber SIM card",
+      "pattern": "^\\d{14,15}$"
+    },
+    "estimatedFraudLoss": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Estimated fraud loss in base currency"
+    },
+    "currency": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$",
+      "default": "USD"
+    },
+    "indicators": {
+      "type": "array",
+      "description": "Fraud indicators that contributed to this case",
+      "items": {
+        "$ref": "#/$defs/FraudIndicator"
+      }
+    },
+    "callDataRecords": {
+      "type": "array",
+      "description": "Associated CDRs as evidence",
+      "items": {
+        "$ref": "#/$defs/CDREvidence"
+      }
+    },
+    "actions": {
+      "type": "array",
+      "description": "Actions taken on this fraud case",
+      "items": {
+        "$ref": "#/$defs/FraudAction"
+      }
+    },
+    "assignedTo": {
+      "type": "string",
+      "description": "Analyst assigned to this case"
+    },
+    "resolutionNotes": {
+      "type": "string"
+    },
+    "closedAt": {
+      "type": ["string", "null"],
+      "format": "date-time"
+    }
+  },
+  "required": ["caseId", "fraudType", "status", "detectedAt"],
+  "$defs": {
+    "FraudIndicator": {
+      "type": "object",
+      "properties": {
+        "indicatorName": {
+          "type": "string",
+          "description": "Name of the fraud indicator rule",
+          "examples": ["HighVolumeInternational", "UnusualCallPattern", "NewSIMHighActivity"]
+        },
+        "indicatorValue": {
+          "type": "string",
+          "description": "Observed value that triggered the indicator"
+        },
+        "threshold": {
+          "type": "string",
+          "description": "Threshold value configured for this indicator"
+        },
+        "weight": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Weight of this indicator in the overall risk score"
+        }
+      },
+      "required": ["indicatorName", "indicatorValue"]
+    },
+    "CDREvidence": {
+      "type": "object",
+      "description": "A Call Detail Record as fraud evidence",
+      "properties": {
+        "cdrId": {
+          "type": "string"
+        },
+        "callDateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "callingNumber": {
+          "type": "string"
+        },
+        "calledNumber": {
+          "type": "string"
+        },
+        "callDuration": {
+          "type": "integer",
+          "description": "Call duration in seconds"
+        },
+        "callType": {
+          "type": "string",
+          "enum": ["VOICE_MO", "VOICE_MT", "SMS_MO", "SMS_MT", "DATA", "ROAMING"]
+        },
+        "charge": {
+          "type": "number"
+        }
+      }
+    },
+    "FraudAction": {
+      "type": "object",
+      "properties": {
+        "actionType": {
+          "type": "string",
+          "enum": ["BLOCK_SUBSCRIBER", "REDUCE_LIMIT", "FLAG_FOR_REVIEW", "NOTIFY_ANALYST", "ESCALATE"]
+        },
+        "takenAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "takenBy": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "required": ["actionType", "takenAt"]
+    }
+  }
+}

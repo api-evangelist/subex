@@ -1,0 +1,55 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "subex": "https://www.subex.com/vocab/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "FraudCase": "subex:FraudCase",
+    "LeakageAlert": "subex:RevenueLeakageAlert",
+    "SubscriberRiskScore": "subex:SubscriberRiskProfile",
+    "ReconciliationRun": "subex:ReconciliationRun",
+    "Subscriber": "schema:Person",
+
+    "caseId": "schema:identifier",
+    "fraudType": "subex:fraudType",
+    "status": "schema:status",
+    "riskScore": "subex:riskScore",
+    "detectedAt": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "subscriberMsisdn": "subex:msisdn",
+    "imsi": "subex:imsi",
+    "estimatedFraudLoss": {
+      "@id": "subex:estimatedLoss",
+      "@type": "xsd:decimal"
+    },
+    "currency": "schema:currency",
+    "indicators": "subex:fraudIndicators",
+    "actions": "subex:caseActions",
+    "assignedTo": "schema:contributor",
+
+    "leakageId": "schema:identifier",
+    "leakageType": "subex:leakageType",
+    "severity": "schema:significance",
+    "estimatedLoss": {
+      "@id": "subex:estimatedRevenueLoss",
+      "@type": "xsd:decimal"
+    },
+    "serviceType": "subex:serviceType",
+    "affectedRecordCount": "subex:affectedRecords",
+    "controlName": "subex:controlName",
+
+    "msisdn": "subex:msisdn",
+    "riskCategory": "subex:riskCategory",
+    "contributingFactors": "subex:riskFactors",
+
+    "runId": "schema:identifier",
+    "runType": "subex:reconciliationType",
+    "matchRate": "subex:matchRate",
+    "totalRecordsProcessed": "subex:recordsProcessed",
+    "matchedRecords": "subex:matchedRecords",
+    "unmatchedRecords": "subex:unmatchedRecords"
+  }
+}
