@@ -21,15 +21,15 @@ security:
   - BearerAuth: []
 
 tags:
-  - name: Revenue Assurance
-    description: Revenue leakage detection and reconciliation
+  - name: Analytics
+    description: Risk analytics and reporting
+
   - name: Fraud Management
     description: Fraud detection and case management
   - name: Reconciliation
     description: CDR and billing data reconciliation
-  - name: Analytics
-    description: Risk analytics and reporting
-
+  - name: Revenue Assurance
+    description: Revenue leakage detection and reconciliation
 paths:
   /revenue-assurance/leakages:
     get:
@@ -231,8 +231,8 @@ paths:
         Returns the current fraud risk score for a subscriber MSISDN based on
         behavioral analytics, call pattern analysis, and historical fraud indicators.
       tags:
-        - Fraud Management
         - Analytics
+        - Fraud Management
       parameters:
         - name: msisdn
           in: path
