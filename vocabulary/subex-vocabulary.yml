@@ -1,0 +1,163 @@
+name: Subex
+description: >-
+  Vocabulary of key terms, concepts, and domain objects used across Subex's telecom revenue
+  assurance and fraud management platform (ROC - Revenue Operations Center). Covers telecom
+  billing, CDR reconciliation, fraud detection, and analytics domains.
+version: "1.0"
+created: "2026-05-02"
+modified: "2026-05-02"
+tags:
+  - Telecom
+  - Revenue Assurance
+  - Fraud Management
+  - Analytics
+  - CDR
+
+terms:
+  - term: ROC (Revenue Operations Center)
+    definition: >-
+      Subex's flagship platform for telecom revenue assurance and fraud management. ROC ingests
+      network CDRs, billing data, and other sources to detect revenue leakage, fraud patterns,
+      and data quality issues across the telecom value chain.
+    category: Platform
+    tags:
+      - Platform
+      - Revenue Assurance
+      - Fraud Management
+
+  - term: Revenue Leakage
+    definition: >-
+      Any situation where a telecom operator fails to collect revenue they are entitled to.
+      Caused by billing errors, provisioning mismatches, unbilled usage, tariff errors,
+      roaming leakage, or interconnect billing discrepancies.
+    category: Domain Concept
+    tags:
+      - Revenue Assurance
+      - Finance
+
+  - term: CDR (Call Detail Record)
+    definition: >-
+      A data record generated for each telecommunications event (call, SMS, data session).
+      Contains details such as source/destination numbers, timestamps, duration, volume,
+      and network elements used. Primary input for billing and reconciliation.
+    category: Technical Concept
+    tags:
+      - CDR
+      - Network
+      - Billing
+
+  - term: Reconciliation
+    definition: >-
+      The process of comparing CDR records across multiple network elements or between
+      network and billing systems to identify discrepancies. Match rates indicate data integrity.
+    category: Process
+    tags:
+      - Reconciliation
+      - CDR
+      - Data Quality
+
+  - term: MSISDN
+    definition: >-
+      Mobile Station Integrated Services Digital Network number. The complete phone number
+      of a subscriber including country code (e.g., 14155552671). Used as the primary
+      subscriber identifier in telecom systems.
+    category: Technical Concept
+    tags:
+      - Subscriber
+      - Identity
+
+  - term: IMSI
+    definition: >-
+      International Mobile Subscriber Identity. A unique 15-digit number stored on the SIM
+      card that identifies a subscriber in a mobile network. Used to detect SIM swap fraud.
+    category: Technical Concept
+    tags:
+      - Subscriber
+      - Identity
+      - Security
+
+  - term: IRSF (International Revenue Share Fraud)
+    definition: >-
+      Fraud scheme where criminals generate large volumes of calls to premium international
+      numbers in which they share revenue. Often targets unmonitored PBX systems.
+      One of the highest-value fraud types in telecom.
+    category: Fraud Type
+    tags:
+      - Fraud
+      - International
+
+  - term: SIM Swap Fraud
+    definition: >-
+      Fraud where an attacker convinces a carrier to transfer a victim's phone number to
+      a SIM they control. Used to bypass SMS-based two-factor authentication.
+    category: Fraud Type
+    tags:
+      - Fraud
+      - Identity Theft
+
+  - term: Bypass Fraud
+    definition: >-
+      Traffic routing fraud where calls are passed through unofficial channels to avoid
+      interconnect fees. Includes SIM boxing (using multiple SIM cards to downgrade
+      international calls to local calls).
+    category: Fraud Type
+    tags:
+      - Fraud
+      - Interconnect
+
+  - term: Wangiri Fraud
+    definition: >-
+      "One ring and cut" fraud. Automated calls ring once then hang up, enticing victims
+      to call back premium-rate numbers. Named from Japanese for "one ring cut."
+    category: Fraud Type
+    tags:
+      - Fraud
+      - Premium Rate
+
+  - term: Roaming Leakage
+    definition: >-
+      Revenue lost from improper billing of roaming services. Occurs when a subscriber
+      uses services on a visited network and the home network fails to collect or properly
+      settle the charges.
+    category: Leakage Type
+    tags:
+      - Revenue Assurance
+      - Roaming
+
+  - term: Risk Score
+    definition: >-
+      A numerical score (0-100) assigned to a subscriber indicating their probability
+      of involvement in fraudulent activity. Calculated from behavioral patterns, network
+      anomalies, and historical fraud indicators.
+    category: Analytical Concept
+    tags:
+      - Fraud Detection
+      - Machine Learning
+
+  - term: Match Rate
+    definition: >-
+      Percentage of CDR records that successfully matched during a reconciliation run.
+      A match rate below 100% indicates potential revenue leakage or data quality issues.
+    category: Metric
+    tags:
+      - Reconciliation
+      - KPI
+
+  - term: Interconnect Billing
+    definition: >-
+      Settlement between telecom operators for traffic carried across each other's networks.
+      Errors in interconnect billing are a significant source of revenue leakage for operators.
+    category: Billing Concept
+    tags:
+      - Interconnect
+      - Billing
+      - Revenue Assurance
+
+  - term: Voice/Data/Roaming Services
+    definition: >-
+      The primary telecom service types monitored by Subex ROC. Each has distinct billing
+      models, CDR formats, and leakage risk profiles.
+    category: Service Types
+    tags:
+      - Services
+      - Network

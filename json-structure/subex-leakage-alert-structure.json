@@ -1,0 +1,62 @@
+{
+  "name": "LeakageAlert",
+  "description": "Subex revenue leakage alert object returned from the Revenue Assurance API.",
+  "type": "object",
+  "properties": {
+    "leakageId": {
+      "type": "string",
+      "description": "Unique leakage alert identifier",
+      "example": "LA-2026-000123"
+    },
+    "leakageType": {
+      "type": "string",
+      "description": "Classification of revenue leakage",
+      "enum": ["UNBILLED_USAGE", "BILLING_ERROR", "PROVISIONING_MISMATCH", "TARIFF_ERROR", "ROAMING_LEAKAGE", "INTERCONNECT_LEAKAGE"]
+    },
+    "severity": {
+      "type": "string",
+      "description": "Severity level of the leakage",
+      "enum": ["CRITICAL", "HIGH", "MEDIUM", "LOW"]
+    },
+    "status": {
+      "type": "string",
+      "description": "Current resolution status",
+      "enum": ["OPEN", "IN_PROGRESS", "RESOLVED", "CLOSED"]
+    },
+    "estimatedLoss": {
+      "type": "number",
+      "description": "Estimated revenue loss in base currency"
+    },
+    "currency": {
+      "type": "string",
+      "description": "ISO 4217 currency code",
+      "example": "USD"
+    },
+    "serviceType": {
+      "type": "string",
+      "description": "Telecom service type affected",
+      "enum": ["VOICE", "DATA", "SMS", "ROAMING", "INTERCONNECT", "DIGITAL"]
+    },
+    "affectedRecordCount": {
+      "type": "integer",
+      "description": "Number of CDR records with leakage"
+    },
+    "controlName": {
+      "type": "string",
+      "description": "Name of the Subex ROC control that detected this leakage"
+    },
+    "detectedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of detection"
+    },
+    "resolutionNotes": {
+      "type": "string",
+      "description": "Notes added during investigation and resolution"
+    },
+    "assignedTo": {
+      "type": "string",
+      "description": "Analyst assigned to investigate"
+    }
+  }
+}

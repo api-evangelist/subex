@@ -1,0 +1,47 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.subex.example.com/roc/v1/fraud/cases?fraudType=SIM_SWAP&status=OPEN&minRiskScore=70&page=0&size=10",
+    "headers": {
+      "Authorization": "Bearer <token>",
+      "Accept": "application/json"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "data": [
+        {
+          "caseId": "FC-2026-001547",
+          "fraudType": "SIM_SWAP",
+          "status": "OPEN",
+          "riskScore": 92,
+          "detectedAt": "2026-05-01T14:32:00Z",
+          "subscriberMsisdn": "14155552671",
+          "imsi": "310260123456789",
+          "estimatedFraudLoss": 1250.00,
+          "currency": "USD",
+          "indicators": ["RAPID_SIM_CHANGE", "UNUSUAL_LOCATION", "HIGH_VALUE_TRANSACTIONS"]
+        },
+        {
+          "caseId": "FC-2026-001548",
+          "fraudType": "SIM_SWAP",
+          "status": "OPEN",
+          "riskScore": 78,
+          "detectedAt": "2026-05-01T16:45:00Z",
+          "subscriberMsisdn": "14085551234",
+          "imsi": "310260987654321",
+          "estimatedFraudLoss": 800.00,
+          "currency": "USD",
+          "indicators": ["RAPID_SIM_CHANGE", "ACCOUNT_TAKEOVER_PATTERN"]
+        }
+      ],
+      "pagination": {
+        "page": 0,
+        "size": 10,
+        "totalElements": 23,
+        "totalPages": 3
+      }
+    }
+  }
+}

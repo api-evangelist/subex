@@ -1,0 +1,43 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.subex.example.com/roc/v1/fraud/subscribers/14155552671/risk-score",
+    "headers": {
+      "Authorization": "Bearer <token>",
+      "Accept": "application/json"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "msisdn": "14155552671",
+      "riskScore": 87,
+      "riskCategory": "HIGH",
+      "lastUpdated": "2026-05-02T08:00:00Z",
+      "contributingFactors": [
+        {
+          "factor": "RAPID_SIM_SWAP",
+          "weight": 0.35,
+          "description": "SIM card changed 3 times in last 30 days"
+        },
+        {
+          "factor": "ROAMING_ANOMALY",
+          "weight": 0.25,
+          "description": "Unusual roaming pattern detected"
+        },
+        {
+          "factor": "HIGH_VALUE_CALLS",
+          "weight": 0.20,
+          "description": "Elevated international call volume to premium destinations"
+        },
+        {
+          "factor": "USAGE_SPIKE",
+          "weight": 0.15,
+          "description": "300% increase in usage in last 7 days"
+        }
+      ],
+      "recommendation": "REVIEW",
+      "openCases": 1
+    }
+  }
+}

@@ -1,0 +1,197 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Subex Revenue Operations Center"
+  description: >-
+    Unified capability for telecom revenue operations. Combines Subex ROC APIs for revenue leakage
+    detection, fraud case management, subscriber risk scoring, CDR reconciliation, and analytics.
+    Used by telecom operators' revenue assurance and fraud management teams.
+  tags:
+    - Subex
+    - Telecom
+    - Revenue Assurance
+    - Fraud Management
+    - CDR Reconciliation
+    - Analytics
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      SUBEX_BEARER_TOKEN: SUBEX_BEARER_TOKEN
+
+capability:
+  consumes:
+    - import: subex-roc
+      location: ./shared/revenue-assurance.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: subex-revenue-ops-api
+      description: "Unified REST API for Subex telecom revenue operations."
+      resources:
+        - path: /v1/leakages
+          name: leakages
+          description: "Revenue leakage alerts"
+          operations:
+            - method: GET
+              name: list-leakage-alerts
+              description: "List revenue leakage alerts"
+              call: "subex-roc.list-leakage-alerts"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/leakages/{leakageId}
+          name: leakage
+          description: "Individual leakage alert"
+          operations:
+            - method: GET
+              name: get-leakage-alert
+              description: "Get a leakage alert"
+              call: "subex-roc.get-leakage-alert"
+              with:
+                leakageId: "rest.leakageId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/fraud-cases
+          name: fraud-cases
+          description: "Fraud case management"
+          operations:
+            - method: GET
+              name: list-fraud-cases
+              description: "List fraud cases"
+              call: "subex-roc.list-fraud-cases"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/fraud-cases/{caseId}
+          name: fraud-case
+          description: "Individual fraud case"
+          operations:
+            - method: GET
+              name: get-fraud-case
+              description: "Get a fraud case"
+              call: "subex-roc.get-fraud-case"
+              with:
+                caseId: "rest.caseId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/subscribers/{msisdn}/risk-score
+          name: subscriber-risk-score
+          description: "Subscriber risk scoring"
+          operations:
+            - method: GET
+              name: get-subscriber-risk-score
+              description: "Get subscriber fraud risk score"
+              call: "subex-roc.get-subscriber-risk-score"
+              with:
+                msisdn: "rest.msisdn"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/reconciliation/runs
+          name: reconciliation-runs
+          description: "CDR reconciliation"
+          operations:
+            - method: GET
+              name: list-reconciliation-runs
+              description: "List reconciliation runs"
+              call: "subex-roc.list-reconciliation-runs"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/analytics/summary
+          name: analytics
+          description: "Revenue analytics"
+          operations:
+            - method: GET
+              name: get-analytics-summary
+              description: "Get analytics summary"
+              call: "subex-roc.get-analytics-summary"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9080
+      namespace: subex-revenue-ops-mcp
+      transport: http
+      description: "MCP server for AI-assisted Subex telecom revenue operations."
+      tools:
+        - name: list-leakage-alerts
+          description: "List Subex revenue leakage alerts with optional severity and type filters"
+          hints:
+            readOnly: true
+          call: "subex-roc.list-leakage-alerts"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-leakage-alert
+          description: "Get details of a specific revenue leakage alert"
+          hints:
+            readOnly: true
+          call: "subex-roc.get-leakage-alert"
+          with:
+            leakageId: "tools.leakageId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: update-leakage-alert
+          description: "Update the status or assignment of a revenue leakage alert"
+          hints:
+            readOnly: false
+            destructive: false
+          call: "subex-roc.update-leakage-alert"
+          with:
+            leakageId: "tools.leakageId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-fraud-cases
+          description: "List telecom fraud cases with optional fraud type and status filters"
+          hints:
+            readOnly: true
+          call: "subex-roc.list-fraud-cases"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-fraud-case
+          description: "Get details of a specific telecom fraud case"
+          hints:
+            readOnly: true
+          call: "subex-roc.get-fraud-case"
+          with:
+            caseId: "tools.caseId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-subscriber-risk-score
+          description: "Get the fraud risk score for a telecom subscriber by their MSISDN"
+          hints:
+            readOnly: true
+          call: "subex-roc.get-subscriber-risk-score"
+          with:
+            msisdn: "tools.msisdn"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-reconciliation-runs
+          description: "List CDR and billing reconciliation runs"
+          hints:
+            readOnly: true
+          call: "subex-roc.list-reconciliation-runs"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-analytics-summary
+          description: "Get summary analytics for revenue assurance and fraud KPIs"
+          hints:
+            readOnly: true
+          call: "subex-roc.get-analytics-summary"
+          outputParameters:
+            - type: object
+              mapping: "$."
