@@ -29,7 +29,7 @@ tags:
   - Fraud Management
   - Analytics
   - BSS/OSS
-type: Contract
+kind: contract
 access: 3rd-Party
 created: '2026-03-18'
 modified: '2026-05-02'
@@ -54,9 +54,9 @@ common:
   - url: https://www.subex.com/contact-us/
     type: Support
   - url: https://www.subex.com/privacy-policy/
-    type: Privacy Policy
+    type: PrivacyPolicy
   - url: https://www.subex.com/newsroom/
-    type: Change Log
+    type: ChangeLog
   - url: rules/subex-rules.yml
     type: Spectral Rules
   - url: capabilities/revenue-operations-center.yaml
