@@ -1,0 +1,94 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Subex Revenue Assurance & Fraud Management API — Reconciliation
+  description: 'Subex Revenue Assurance & Fraud Management API — Reconciliation. 1 operations. Lead operation: List reconciliation
+    runs. Self-contained Naftiko capability covering one Subex business surface.'
+  tags:
+  - Subex
+  - Reconciliation
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SUBEX_API_KEY: SUBEX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: revenue-assurance-reconciliation
+    baseUri: https://api.subex.example.com/roc/v1
+    description: Subex Revenue Assurance & Fraud Management API — Reconciliation business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: reconciliation-runs
+      path: /reconciliation/runs
+      operations:
+      - name: listreconciliationruns
+        method: GET
+        description: List reconciliation runs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: startDate
+          in: query
+          type: string
+        - name: endDate
+          in: query
+          type: string
+        - name: runType
+          in: query
+          type: string
+        - name: status
+          in: query
+          type: string
+    authentication:
+      type: bearer
+      token: '{{env.SUBEX_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: revenue-assurance-reconciliation-rest
+    port: 8080
+    description: REST adapter for Subex Revenue Assurance & Fraud Management API — Reconciliation. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/reconciliation/runs
+      name: reconciliation-runs
+      description: REST surface for reconciliation-runs.
+      operations:
+      - method: GET
+        name: listreconciliationruns
+        description: List reconciliation runs
+        call: revenue-assurance-reconciliation.listreconciliationruns
+        with:
+          startDate: rest.startDate
+          endDate: rest.endDate
+          runType: rest.runType
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: revenue-assurance-reconciliation-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Subex Revenue Assurance & Fraud Management API — Reconciliation. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: list-reconciliation-runs
+      description: List reconciliation runs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: revenue-assurance-reconciliation.listreconciliationruns
+      with:
+        startDate: tools.startDate
+        endDate: tools.endDate
+        runType: tools.runType
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.

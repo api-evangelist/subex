@@ -1,0 +1,191 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Subex Revenue Assurance & Fraud Management API — Revenue Assurance
+  description: 'Subex Revenue Assurance & Fraud Management API — Revenue Assurance. 3 operations. Lead operation: List revenue
+    leakage alerts. Self-contained Naftiko capability covering one Subex business surface.'
+  tags:
+  - Subex
+  - Revenue Assurance
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SUBEX_API_KEY: SUBEX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: revenue-assurance-revenue-assurance
+    baseUri: https://api.subex.example.com/roc/v1
+    description: Subex Revenue Assurance & Fraud Management API — Revenue Assurance business capability. Self-contained, no
+      shared references.
+    resources:
+    - name: revenue-assurance-leakages
+      path: /revenue-assurance/leakages
+      operations:
+      - name: listleakagealerts
+        method: GET
+        description: List revenue leakage alerts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: startDate
+          in: query
+          type: string
+        - name: endDate
+          in: query
+          type: string
+        - name: leakageType
+          in: query
+          type: string
+        - name: severity
+          in: query
+          type: string
+        - name: status
+          in: query
+          type: string
+        - name: page
+          in: query
+          type: integer
+        - name: size
+          in: query
+          type: integer
+    - name: revenue-assurance-leakages-leakageId
+      path: /revenue-assurance/leakages/{leakageId}
+      operations:
+      - name: getleakagealert
+        method: GET
+        description: Get leakage alert details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: leakageId
+          in: path
+          type: string
+          required: true
+      - name: updateleakagealert
+        method: PATCH
+        description: Update leakage alert status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: leakageId
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: bearer
+      token: '{{env.SUBEX_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: revenue-assurance-revenue-assurance-rest
+    port: 8080
+    description: REST adapter for Subex Revenue Assurance & Fraud Management API — Revenue Assurance. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/revenue-assurance/leakages
+      name: revenue-assurance-leakages
+      description: REST surface for revenue-assurance-leakages.
+      operations:
+      - method: GET
+        name: listleakagealerts
+        description: List revenue leakage alerts
+        call: revenue-assurance-revenue-assurance.listleakagealerts
+        with:
+          startDate: rest.startDate
+          endDate: rest.endDate
+          leakageType: rest.leakageType
+          severity: rest.severity
+          status: rest.status
+          page: rest.page
+          size: rest.size
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/revenue-assurance/leakages/{leakageid}
+      name: revenue-assurance-leakages-leakageid
+      description: REST surface for revenue-assurance-leakages-leakageId.
+      operations:
+      - method: GET
+        name: getleakagealert
+        description: Get leakage alert details
+        call: revenue-assurance-revenue-assurance.getleakagealert
+        with:
+          leakageId: rest.leakageId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updateleakagealert
+        description: Update leakage alert status
+        call: revenue-assurance-revenue-assurance.updateleakagealert
+        with:
+          leakageId: rest.leakageId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: revenue-assurance-revenue-assurance-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Subex Revenue Assurance & Fraud Management API — Revenue Assurance. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    tools:
+    - name: list-revenue-leakage-alerts
+      description: List revenue leakage alerts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: revenue-assurance-revenue-assurance.listleakagealerts
+      with:
+        startDate: tools.startDate
+        endDate: tools.endDate
+        leakageType: tools.leakageType
+        severity: tools.severity
+        status: tools.status
+        page: tools.page
+        size: tools.size
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-leakage-alert-details
+      description: Get leakage alert details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: revenue-assurance-revenue-assurance.getleakagealert
+      with:
+        leakageId: tools.leakageId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-leakage-alert-status
+      description: Update leakage alert status
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: revenue-assurance-revenue-assurance.updateleakagealert
+      with:
+        leakageId: tools.leakageId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
