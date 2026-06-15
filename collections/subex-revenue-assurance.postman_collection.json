@@ -1,0 +1,1267 @@
+{
+  "item": [
+    {
+      "id": "f1e602da-cfb2-405f-865c-9b72c6ee1d5d",
+      "name": "Analytics",
+      "description": {
+        "content": "Risk analytics and reporting",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "eac2d921-9035-4f69-af22-0b2e388234c3",
+          "name": "Get subscriber risk score",
+          "request": {
+            "name": "Get subscriber risk score",
+            "description": {
+              "content": "Returns the current fraud risk score for a subscriber MSISDN based on behavioral analytics, call pattern analysis, and historical fraud indicators.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fraud",
+                "subscribers",
+                ":msisdn",
+                "risk-score"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "msisdn",
+                  "description": "(Required) Subscriber MSISDN (international format without +)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "65010274-dafb-4d39-b6c1-c456e5a1f723",
+              "name": "Subscriber risk score",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fraud",
+                    "subscribers",
+                    ":msisdn",
+                    "risk-score"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "msisdn",
+                      "description": "(Required) Subscriber MSISDN (international format without +)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"msisdn\": \"string\",\n  \"riskScore\": 67,\n  \"riskCategory\": \"LOW\",\n  \"lastUpdated\": \"1982-11-09T09:06:00.852Z\",\n  \"contributingFactors\": [\n    {\n      \"factor\": \"string\",\n      \"contribution\": 2194.6331666941796\n    },\n    {\n      \"factor\": \"string\",\n      \"contribution\": 4005.2133884947148\n    }\n  ],\n  \"activeFraudCases\": 4690,\n  \"historicalFraudFlags\": 3957\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e8ceb25b-894d-440b-a70b-a5f4a11f9359",
+          "name": "Get revenue assurance analytics summary",
+          "request": {
+            "name": "Get revenue assurance analytics summary",
+            "description": {
+              "content": "Returns aggregated metrics on revenue leakage, fraud losses, and recovery amounts for a specified period.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "analytics",
+                "summary"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "period",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "<date>",
+                  "description": "(Required) Period reference date"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ff3868d4-94d6-4432-9f10-a8f6cd350828",
+              "name": "Analytics summary",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "period",
+                      "value": "MONTHLY"
+                    },
+                    {
+                      "key": "date",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"period\": \"string\",\n  \"periodStart\": \"2021-07-03\",\n  \"periodEnd\": \"2010-03-05\",\n  \"totalRevenue\": 487.4565807270137,\n  \"leakageDetected\": 6340.366693654424,\n  \"leakageRecovered\": 6894.907383507086,\n  \"leakageRate\": 9243.816481892916,\n  \"fraudLossDetected\": 5971.557220084633,\n  \"fraudLossPrevented\": 9186.926763703368,\n  \"openAlerts\": 4251,\n  \"resolvedAlerts\": 5765,\n  \"currency\": \"USD\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "8399c34f-6b7f-4462-aefb-d85d8faa1686",
+      "name": "Fraud Management",
+      "description": {
+        "content": "Fraud detection and case management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8eab3ece-626e-411c-949c-9ae050e8d4d5",
+          "name": "List fraud cases",
+          "request": {
+            "name": "List fraud cases",
+            "description": {
+              "content": "Returns fraud cases detected by Subex fraud analytics including SIM swap, bypass fraud, subscription fraud, and international revenue share fraud (IRSF).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fraud",
+                "cases"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fraudType",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "riskScore",
+                  "value": "<integer>",
+                  "description": "Minimum risk score threshold (0-100)"
+                },
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "50"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "958bdbf6-488e-4851-bd90-55ae28d5cd99",
+              "name": "List of fraud cases",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fraud",
+                    "cases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fraudType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "riskScore",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "size",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cases\": [\n    {\n      \"caseId\": \"string\",\n      \"fraudType\": \"SUBSCRIPTION_FRAUD\",\n      \"status\": \"FALSE_POSITIVE\",\n      \"riskScore\": 35,\n      \"detectedAt\": \"1972-03-15T06:13:46.583Z\",\n      \"subscriberMsisdn\": \"string\",\n      \"imsi\": \"string\",\n      \"estimatedFraudLoss\": 9148.385955642756,\n      \"currency\": \"USD\",\n      \"indicators\": [\n        {\n          \"indicatorName\": \"string\",\n          \"indicatorValue\": \"string\",\n          \"weight\": 8443.420868173913\n        },\n        {\n          \"indicatorName\": \"string\",\n          \"indicatorValue\": \"string\",\n          \"weight\": 1988.6332173056853\n        }\n      ],\n      \"actions\": [\n        {\n          \"actionType\": \"BLOCK_SUBSCRIBER\",\n          \"takenAt\": \"2023-06-15T01:13:34.941Z\",\n          \"takenBy\": \"string\"\n        },\n        {\n          \"actionType\": \"BLOCK_SUBSCRIBER\",\n          \"takenAt\": \"1968-10-21T19:44:27.458Z\",\n          \"takenBy\": \"string\"\n        }\n      ]\n    },\n    {\n      \"caseId\": \"string\",\n      \"fraudType\": \"INTERCONNECT_FRAUD\",\n      \"status\": \"UNDER_INVESTIGATION\",\n      \"riskScore\": 49,\n      \"detectedAt\": \"1996-12-29T06:08:52.700Z\",\n      \"subscriberMsisdn\": \"string\",\n      \"imsi\": \"string\",\n      \"estimatedFraudLoss\": 149.2291005497215,\n      \"currency\": \"USD\",\n      \"indicators\": [\n        {\n          \"indicatorName\": \"string\",\n          \"indicatorValue\": \"string\",\n          \"weight\": 5436.122869318738\n        },\n        {\n          \"indicatorName\": \"string\",\n          \"indicatorValue\": \"string\",\n          \"weight\": 5608.57001871957\n        }\n      ],\n      \"actions\": [\n        {\n          \"actionType\": \"FLAG_FOR_REVIEW\",\n          \"takenAt\": \"2001-12-20T02:08:18.957Z\",\n          \"takenBy\": \"string\"\n        },\n        {\n          \"actionType\": \"FLAG_FOR_REVIEW\",\n          \"takenAt\": \"1965-08-23T21:34:11.929Z\",\n          \"takenBy\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"totalCount\": 8807,\n  \"page\": 3523\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f0872c18-3c5e-4b87-81d7-4d594fd241e0",
+          "name": "Get fraud case details",
+          "request": {
+            "name": "Get fraud case details",
+            "description": {
+              "content": "Returns full details for a specific fraud case including evidence and timeline.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fraud",
+                "cases",
+                ":caseId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "caseId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3533180e-b646-4df7-82c1-79c18b1f9ae5",
+              "name": "Fraud case details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fraud",
+                    "cases",
+                    ":caseId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "caseId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"caseId\": \"string\",\n  \"fraudType\": \"WANGIRI\",\n  \"status\": \"FALSE_POSITIVE\",\n  \"riskScore\": 74,\n  \"detectedAt\": \"2022-07-23T01:58:49.334Z\",\n  \"subscriberMsisdn\": \"string\",\n  \"imsi\": \"string\",\n  \"estimatedFraudLoss\": 8053.08296361354,\n  \"currency\": \"USD\",\n  \"indicators\": [\n    {\n      \"indicatorName\": \"string\",\n      \"indicatorValue\": \"string\",\n      \"weight\": 828.4440141930893\n    },\n    {\n      \"indicatorName\": \"string\",\n      \"indicatorValue\": \"string\",\n      \"weight\": 3732.578430197634\n    }\n  ],\n  \"actions\": [\n    {\n      \"actionType\": \"NOTIFY_ANALYST\",\n      \"takenAt\": \"1980-04-03T14:18:44.655Z\",\n      \"takenBy\": \"string\"\n    },\n    {\n      \"actionType\": \"FLAG_FOR_REVIEW\",\n      \"takenAt\": \"1982-07-02T23:02:18.070Z\",\n      \"takenBy\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "157e3849-015d-4833-8d41-11b43c5cd6a4",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fraud",
+                    "cases",
+                    ":caseId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "caseId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "76e60d25-2719-4fc2-ad7d-675cfad3cdca",
+          "name": "Get subscriber risk score",
+          "request": {
+            "name": "Get subscriber risk score",
+            "description": {
+              "content": "Returns the current fraud risk score for a subscriber MSISDN based on behavioral analytics, call pattern analysis, and historical fraud indicators.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fraud",
+                "subscribers",
+                ":msisdn",
+                "risk-score"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "msisdn",
+                  "description": "(Required) Subscriber MSISDN (international format without +)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8027e08d-142e-467e-a7a7-f8c54914dc49",
+              "name": "Subscriber risk score",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fraud",
+                    "subscribers",
+                    ":msisdn",
+                    "risk-score"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "msisdn",
+                      "description": "(Required) Subscriber MSISDN (international format without +)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"msisdn\": \"string\",\n  \"riskScore\": 17,\n  \"riskCategory\": \"HIGH\",\n  \"lastUpdated\": \"1986-07-11T23:31:40.862Z\",\n  \"contributingFactors\": [\n    {\n      \"factor\": \"string\",\n      \"contribution\": 5848.292769392754\n    },\n    {\n      \"factor\": \"string\",\n      \"contribution\": 9063.747950967976\n    }\n  ],\n  \"activeFraudCases\": 6081,\n  \"historicalFraudFlags\": 8881\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "2690b7be-dea7-417d-b979-1d68b01e4a04",
+      "name": "Reconciliation",
+      "description": {
+        "content": "CDR and billing data reconciliation",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8bd5cf3b-334a-484d-bddc-405d3fffe6d0",
+          "name": "List reconciliation runs",
+          "request": {
+            "name": "List reconciliation runs",
+            "description": {
+              "content": "Returns reconciliation run history for CDR and billing data matching.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "reconciliation",
+                "runs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "runType",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "725ecde2-7e3e-49a6-ae4e-2a23f488417f",
+              "name": "Reconciliation run list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reconciliation",
+                    "runs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "runType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"runs\": [\n    {\n      \"runId\": \"string\",\n      \"runType\": \"string\",\n      \"startTime\": \"1970-03-12T00:04:25.374Z\",\n      \"endTime\": \"1985-03-28T01:56:26.064Z\",\n      \"status\": \"FAILED\",\n      \"totalRecordsProcessed\": 2532,\n      \"matchedRecords\": 1235,\n      \"unmatchedRecords\": 9467,\n      \"matchRate\": 5174.577357627469,\n      \"leakageAlerts\": 7194\n    },\n    {\n      \"runId\": \"string\",\n      \"runType\": \"string\",\n      \"startTime\": \"1981-01-17T01:36:37.444Z\",\n      \"endTime\": \"1962-01-06T06:51:40.318Z\",\n      \"status\": \"FAILED\",\n      \"totalRecordsProcessed\": 1589,\n      \"matchedRecords\": 755,\n      \"unmatchedRecords\": 2115,\n      \"matchRate\": 875.4778864021595,\n      \"leakageAlerts\": 8718\n    }\n  ],\n  \"totalCount\": 4601\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "0312cef6-fb55-4f64-b3c3-1c6f0a2fc030",
+      "name": "Revenue Assurance",
+      "description": {
+        "content": "Revenue leakage detection and reconciliation",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1124b09b-4b3b-430d-9e2f-64dc1a8f9df4",
+          "name": "List revenue leakage alerts",
+          "request": {
+            "name": "List revenue leakage alerts",
+            "description": {
+              "content": "Returns detected revenue leakage alerts across all monitored service streams including voice, data, roaming, and digital services. Supports filtering by leakage type, severity, date range, and resolution status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "revenue-assurance",
+                "leakages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "leakageType",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "severity",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "50"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "247b4ab0-17e8-42b0-8826-9d17f32c2325",
+              "name": "List of revenue leakage alerts",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "revenue-assurance",
+                    "leakages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "leakageType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "severity",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "size",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"alerts\": [\n    {\n      \"leakageId\": \"string\",\n      \"leakageType\": \"TARIFF_ERROR\",\n      \"severity\": \"HIGH\",\n      \"status\": \"OPEN\",\n      \"detectedAt\": \"1962-03-23T22:32:04.324Z\",\n      \"serviceType\": \"VOICE\",\n      \"estimatedLoss\": 1532.4491137053985,\n      \"currency\": \"USD\",\n      \"description\": \"string\",\n      \"affectedRecordCount\": 507,\n      \"dataSource\": \"string\",\n      \"controlName\": \"string\",\n      \"assignedTo\": \"string\",\n      \"resolvedAt\": \"1967-05-22T18:59:20.488Z\",\n      \"resolutionNotes\": \"string\"\n    },\n    {\n      \"leakageId\": \"string\",\n      \"leakageType\": \"BILLING_ERROR\",\n      \"severity\": \"MEDIUM\",\n      \"status\": \"RESOLVED\",\n      \"detectedAt\": \"2023-05-25T17:28:05.190Z\",\n      \"serviceType\": \"INTERCONNECT\",\n      \"estimatedLoss\": 9104.956608334138,\n      \"currency\": \"USD\",\n      \"description\": \"string\",\n      \"affectedRecordCount\": 9373,\n      \"dataSource\": \"string\",\n      \"controlName\": \"string\",\n      \"assignedTo\": \"string\",\n      \"resolvedAt\": \"2024-01-12T11:29:39.280Z\",\n      \"resolutionNotes\": \"string\"\n    }\n  ],\n  \"totalCount\": 8451,\n  \"totalEstimatedLoss\": 3827.9574057873056,\n  \"page\": 8815,\n  \"pageSize\": 4607\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7b2c5f43-9de0-447c-ae8c-c1101323f848",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "revenue-assurance",
+                    "leakages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "leakageType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "severity",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "size",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ed72c064-41ce-4ca2-9c9b-fa87e03c2ef4",
+          "name": "Get leakage alert details",
+          "request": {
+            "name": "Get leakage alert details",
+            "description": {
+              "content": "Returns detailed information for a specific revenue leakage alert.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "revenue-assurance",
+                "leakages",
+                ":leakageId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "leakageId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6e68dc09-c01d-4bb6-b7af-04bbcf742c38",
+              "name": "Leakage alert details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "revenue-assurance",
+                    "leakages",
+                    ":leakageId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "leakageId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"leakageId\": \"string\",\n  \"leakageType\": \"UNBILLED_USAGE\",\n  \"severity\": \"LOW\",\n  \"status\": \"OPEN\",\n  \"detectedAt\": \"2016-10-28T00:53:19.483Z\",\n  \"serviceType\": \"DIGITAL\",\n  \"estimatedLoss\": 8797.768596421021,\n  \"currency\": \"USD\",\n  \"description\": \"string\",\n  \"affectedRecordCount\": 4312,\n  \"dataSource\": \"string\",\n  \"controlName\": \"string\",\n  \"assignedTo\": \"string\",\n  \"resolvedAt\": \"1960-05-28T23:45:50.229Z\",\n  \"resolutionNotes\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1e55a66-4fa9-4cc0-a70e-469b82066981",
+              "name": "Alert not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "revenue-assurance",
+                    "leakages",
+                    ":leakageId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "leakageId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f4c2d800-17bd-4312-882f-747cb376ac43",
+          "name": "Update leakage alert status",
+          "request": {
+            "name": "Update leakage alert status",
+            "description": {
+              "content": "Updates the status and resolution notes for a leakage alert.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "revenue-assurance",
+                "leakages",
+                ":leakageId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "leakageId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"<string>\",\n  \"resolutionNotes\": \"<string>\",\n  \"assignedTo\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ef5d858f-c076-4b8e-b0b7-8f34706e0a68",
+              "name": "Alert updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "revenue-assurance",
+                    "leakages",
+                    ":leakageId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "leakageId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"<string>\",\n  \"resolutionNotes\": \"<string>\",\n  \"assignedTo\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"leakageId\": \"string\",\n  \"leakageType\": \"UNBILLED_USAGE\",\n  \"severity\": \"LOW\",\n  \"status\": \"OPEN\",\n  \"detectedAt\": \"2016-10-28T00:53:19.483Z\",\n  \"serviceType\": \"DIGITAL\",\n  \"estimatedLoss\": 8797.768596421021,\n  \"currency\": \"USD\",\n  \"description\": \"string\",\n  \"affectedRecordCount\": 4312,\n  \"dataSource\": \"string\",\n  \"controlName\": \"string\",\n  \"assignedTo\": \"string\",\n  \"resolvedAt\": \"1960-05-28T23:45:50.229Z\",\n  \"resolutionNotes\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.subex.example.com/roc/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "fd4c1439-49fc-4fb9-adac-0641dbdb50fc",
+    "name": "Subex Revenue Assurance & Fraud Management API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Subex provides revenue assurance and fraud management APIs for telecom operators. APIs enable revenue leakage detection, usage reconciliation, interconnect billing verification, fraud analytics, and subscriber risk scoring across voice, data, and digital services. Subex ROC (Revenue Operations Center) is the primary platform.\n\nContact Support:\n Name: Subex Support",
+      "type": "text/plain"
+    }
+  }
+}

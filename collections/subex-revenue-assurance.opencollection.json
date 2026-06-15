@@ -1,0 +1,279 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Subex Revenue Assurance & Fraud Management API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Revenue Assurance",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List revenue leakage alerts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.subex.example.com/roc/v1/revenue-assurance/leakages",
+            "params": [
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "leakageType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "severity",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns detected revenue leakage alerts across all monitored service streams including voice, data, roaming, and digital services. Supports filtering by leakage type, severity, date range, and resolution status."
+        },
+        {
+          "info": {
+            "name": "Get leakage alert details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.subex.example.com/roc/v1/revenue-assurance/leakages/:leakageId",
+            "params": [
+              {
+                "name": "leakageId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns detailed information for a specific revenue leakage alert."
+        },
+        {
+          "info": {
+            "name": "Update leakage alert status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.subex.example.com/roc/v1/revenue-assurance/leakages/:leakageId",
+            "params": [
+              {
+                "name": "leakageId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the status and resolution notes for a leakage alert."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Fraud Management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List fraud cases",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.subex.example.com/roc/v1/fraud/cases",
+            "params": [
+              {
+                "name": "fraudType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "riskScore",
+                "value": "",
+                "type": "query",
+                "description": "Minimum risk score threshold (0-100)"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns fraud cases detected by Subex fraud analytics including SIM swap, bypass fraud, subscription fraud, and international revenue share fraud (IRSF)."
+        },
+        {
+          "info": {
+            "name": "Get fraud case details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.subex.example.com/roc/v1/fraud/cases/:caseId",
+            "params": [
+              {
+                "name": "caseId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns full details for a specific fraud case including evidence and timeline."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Analytics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get subscriber risk score",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.subex.example.com/roc/v1/fraud/subscribers/:msisdn/risk-score",
+            "params": [
+              {
+                "name": "msisdn",
+                "value": "14155552671",
+                "type": "path",
+                "description": "Subscriber MSISDN (international format without +)"
+              }
+            ]
+          },
+          "docs": "Returns the current fraud risk score for a subscriber MSISDN based on behavioral analytics, call pattern analysis, and historical fraud indicators."
+        },
+        {
+          "info": {
+            "name": "Get revenue assurance analytics summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.subex.example.com/roc/v1/analytics/summary",
+            "params": [
+              {
+                "name": "period",
+                "value": "MONTHLY",
+                "type": "query"
+              },
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "Period reference date"
+              }
+            ]
+          },
+          "docs": "Returns aggregated metrics on revenue leakage, fraud losses, and recovery amounts for a specified period."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Reconciliation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List reconciliation runs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.subex.example.com/roc/v1/reconciliation/runs",
+            "params": [
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "runType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns reconciliation run history for CDR and billing data matching."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
