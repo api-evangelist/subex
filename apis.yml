@@ -60,16 +60,16 @@ common:
   - url: https://www.subex.com/newsroom/
     type: ChangeLog
   - url: rules/subex-rules.yml
-    type: Spectral Rules
+    type: SpectralRules
   - url: vocabulary/subex-vocabulary.yml
     type: Vocabulary
   - url: json-schema/subex-fraud-case-schema.json
-    type: JSON Schema
+    type: JSONSchema
   - url: json-structure/subex-leakage-alert-structure.json
-    type: JSON Structure
+    type: JSONStructure
   - url: json-ld/subex-context.jsonld
-    type: JSON-LD Context
+    type: JSONLDContext
   - url: examples/subex-list-fraud-cases-example.json
-    type: Example
+    type: Examples
   - url: examples/subex-get-subscriber-risk-score-example.json
-    type: Example
+    type: Examples
