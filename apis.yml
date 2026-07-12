@@ -43,6 +43,10 @@ maintainers:
     email: kin@apievangelist.com
 specificationVersion: '0.19'
 common:
+  - type: DomainSecurity
+    url: security/subex-domain-security.yml
+  - type: Authentication
+    url: authentication/subex-authentication.yml
   - type: GitHubOrganization
     url: https://github.com/subex
   - type: LinkedIn
