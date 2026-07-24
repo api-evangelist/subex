@@ -1,0 +1,113 @@
+openapi: 3.1.0
+info:
+  title: Subex Revenue Assurance & Fraud Management Analytics Reconciliation API
+  description: Subex provides revenue assurance and fraud management APIs for telecom operators. APIs enable revenue leakage detection, usage reconciliation, interconnect billing verification, fraud analytics, and subscriber risk scoring across voice, data, and digital services. Subex ROC (Revenue Operations Center) is the primary platform.
+  version: '1.0'
+  contact:
+    name: Subex Support
+    url: https://www.subex.com/contact-us/
+  license:
+    name: Subex License Agreement
+    url: https://www.subex.com/privacy-policy/
+servers:
+- url: https://api.subex.example.com/roc/v1
+  description: Subex ROC API (customer-hosted or cloud deployment)
+security:
+- BearerAuth: []
+tags:
+- name: Reconciliation
+  description: CDR and billing data reconciliation
+paths:
+  /reconciliation/runs:
+    get:
+      operationId: listReconciliationRuns
+      summary: List reconciliation runs
+      description: Returns reconciliation run history for CDR and billing data matching.
+      tags:
+      - Reconciliation
+      parameters:
+      - name: startDate
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: endDate
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: runType
+        in: query
+        schema:
+          type: string
+          enum:
+          - VOICE_CDR
+          - DATA_CDR
+          - ROAMING
+          - INTERCONNECT
+          - BILLING
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - RUNNING
+          - COMPLETED
+          - FAILED
+          - CANCELLED
+      responses:
+        '200':
+          description: Reconciliation run list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReconciliationRunListResponse'
+components:
+  schemas:
+    ReconciliationRunListResponse:
+      type: object
+      properties:
+        runs:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReconciliationRun'
+        totalCount:
+          type: integer
+    ReconciliationRun:
+      type: object
+      properties:
+        runId:
+          type: string
+        runType:
+          type: string
+        startTime:
+          type: string
+          format: date-time
+        endTime:
+          type: string
+          format: date-time
+          nullable: true
+        status:
+          type: string
+          enum:
+          - RUNNING
+          - COMPLETED
+          - FAILED
+          - CANCELLED
+        totalRecordsProcessed:
+          type: integer
+        matchedRecords:
+          type: integer
+        unmatchedRecords:
+          type: integer
+        matchRate:
+          type: number
+          description: Match rate as decimal (0.0-1.0)
+        leakageAlerts:
+          type: integer
+          description: Number of leakage alerts generated
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

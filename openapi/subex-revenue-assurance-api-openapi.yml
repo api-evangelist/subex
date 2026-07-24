@@ -1,0 +1,229 @@
+openapi: 3.1.0
+info:
+  title: Subex & Fraud Management Analytics Revenue Assurance API
+  description: Subex provides revenue assurance and fraud management APIs for telecom operators. APIs enable revenue leakage detection, usage reconciliation, interconnect billing verification, fraud analytics, and subscriber risk scoring across voice, data, and digital services. Subex ROC (Revenue Operations Center) is the primary platform.
+  version: '1.0'
+  contact:
+    name: Subex Support
+    url: https://www.subex.com/contact-us/
+  license:
+    name: Subex License Agreement
+    url: https://www.subex.com/privacy-policy/
+servers:
+- url: https://api.subex.example.com/roc/v1
+  description: Subex ROC API (customer-hosted or cloud deployment)
+security:
+- BearerAuth: []
+tags:
+- name: Revenue Assurance
+  description: Revenue leakage detection and reconciliation
+paths:
+  /revenue-assurance/leakages:
+    get:
+      operationId: listLeakageAlerts
+      summary: List revenue leakage alerts
+      description: Returns detected revenue leakage alerts across all monitored service streams including voice, data, roaming, and digital services. Supports filtering by leakage type, severity, date range, and resolution status.
+      tags:
+      - Revenue Assurance
+      parameters:
+      - name: startDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date
+      - name: endDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date
+      - name: leakageType
+        in: query
+        schema:
+          type: string
+          enum:
+          - UNBILLED_USAGE
+          - BILLING_ERROR
+          - PROVISIONING_MISMATCH
+          - TARIFF_ERROR
+          - ROAMING_LEAKAGE
+          - INTERCONNECT_LEAKAGE
+      - name: severity
+        in: query
+        schema:
+          type: string
+          enum:
+          - CRITICAL
+          - HIGH
+          - MEDIUM
+          - LOW
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - OPEN
+          - IN_PROGRESS
+          - RESOLVED
+          - CLOSED
+      - name: page
+        in: query
+        schema:
+          type: integer
+          default: 0
+      - name: size
+        in: query
+        schema:
+          type: integer
+          default: 50
+      responses:
+        '200':
+          description: List of revenue leakage alerts
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LeakageAlertListResponse'
+        '401':
+          description: Unauthorized
+  /revenue-assurance/leakages/{leakageId}:
+    get:
+      operationId: getLeakageAlert
+      summary: Get leakage alert details
+      description: Returns detailed information for a specific revenue leakage alert.
+      tags:
+      - Revenue Assurance
+      parameters:
+      - name: leakageId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Leakage alert details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LeakageAlert'
+        '404':
+          description: Alert not found
+    patch:
+      operationId: updateLeakageAlert
+      summary: Update leakage alert status
+      description: Updates the status and resolution notes for a leakage alert.
+      tags:
+      - Revenue Assurance
+      parameters:
+      - name: leakageId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum:
+                  - IN_PROGRESS
+                  - RESOLVED
+                  - CLOSED
+                resolutionNotes:
+                  type: string
+                assignedTo:
+                  type: string
+      responses:
+        '200':
+          description: Alert updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LeakageAlert'
+components:
+  schemas:
+    LeakageAlert:
+      type: object
+      properties:
+        leakageId:
+          type: string
+        leakageType:
+          type: string
+          enum:
+          - UNBILLED_USAGE
+          - BILLING_ERROR
+          - PROVISIONING_MISMATCH
+          - TARIFF_ERROR
+          - ROAMING_LEAKAGE
+          - INTERCONNECT_LEAKAGE
+        severity:
+          type: string
+          enum:
+          - CRITICAL
+          - HIGH
+          - MEDIUM
+          - LOW
+        status:
+          type: string
+          enum:
+          - OPEN
+          - IN_PROGRESS
+          - RESOLVED
+          - CLOSED
+        detectedAt:
+          type: string
+          format: date-time
+        serviceType:
+          type: string
+          enum:
+          - VOICE
+          - DATA
+          - SMS
+          - ROAMING
+          - INTERCONNECT
+          - DIGITAL
+        estimatedLoss:
+          type: number
+          description: Estimated revenue loss in USD
+        currency:
+          type: string
+          default: USD
+        description:
+          type: string
+        affectedRecordCount:
+          type: integer
+        dataSource:
+          type: string
+        controlName:
+          type: string
+        assignedTo:
+          type: string
+        resolvedAt:
+          type: string
+          format: date-time
+          nullable: true
+        resolutionNotes:
+          type: string
+    LeakageAlertListResponse:
+      type: object
+      properties:
+        alerts:
+          type: array
+          items:
+            $ref: '#/components/schemas/LeakageAlert'
+        totalCount:
+          type: integer
+        totalEstimatedLoss:
+          type: number
+        page:
+          type: integer
+        pageSize:
+          type: integer
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

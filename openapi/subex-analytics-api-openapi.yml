@@ -1,0 +1,147 @@
+openapi: 3.1.0
+info:
+  title: Subex Revenue Assurance & Fraud Management Analytics API
+  description: Subex provides revenue assurance and fraud management APIs for telecom operators. APIs enable revenue leakage detection, usage reconciliation, interconnect billing verification, fraud analytics, and subscriber risk scoring across voice, data, and digital services. Subex ROC (Revenue Operations Center) is the primary platform.
+  version: '1.0'
+  contact:
+    name: Subex Support
+    url: https://www.subex.com/contact-us/
+  license:
+    name: Subex License Agreement
+    url: https://www.subex.com/privacy-policy/
+servers:
+- url: https://api.subex.example.com/roc/v1
+  description: Subex ROC API (customer-hosted or cloud deployment)
+security:
+- BearerAuth: []
+tags:
+- name: Analytics
+  description: Risk analytics and reporting
+paths:
+  /fraud/subscribers/{msisdn}/risk-score:
+    get:
+      operationId: getSubscriberRiskScore
+      summary: Get subscriber risk score
+      description: Returns the current fraud risk score for a subscriber MSISDN based on behavioral analytics, call pattern analysis, and historical fraud indicators.
+      tags:
+      - Analytics
+      parameters:
+      - name: msisdn
+        in: path
+        required: true
+        description: Subscriber MSISDN (international format without +)
+        schema:
+          type: string
+        example: '14155552671'
+      responses:
+        '200':
+          description: Subscriber risk score
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriberRiskScore'
+  /analytics/summary:
+    get:
+      operationId: getAnalyticsSummary
+      summary: Get revenue assurance analytics summary
+      description: Returns aggregated metrics on revenue leakage, fraud losses, and recovery amounts for a specified period.
+      tags:
+      - Analytics
+      parameters:
+      - name: period
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - DAILY
+          - WEEKLY
+          - MONTHLY
+          - QUARTERLY
+          - YEARLY
+        example: MONTHLY
+      - name: date
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date
+        description: Period reference date
+      responses:
+        '200':
+          description: Analytics summary
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalyticsSummary'
+components:
+  schemas:
+    AnalyticsSummary:
+      type: object
+      properties:
+        period:
+          type: string
+        periodStart:
+          type: string
+          format: date
+        periodEnd:
+          type: string
+          format: date
+        totalRevenue:
+          type: number
+        leakageDetected:
+          type: number
+        leakageRecovered:
+          type: number
+        leakageRate:
+          type: number
+          description: Leakage as percentage of total revenue
+        fraudLossDetected:
+          type: number
+        fraudLossPrevented:
+          type: number
+        openAlerts:
+          type: integer
+        resolvedAlerts:
+          type: integer
+        currency:
+          type: string
+          default: USD
+    SubscriberRiskScore:
+      type: object
+      properties:
+        msisdn:
+          type: string
+        riskScore:
+          type: integer
+          minimum: 0
+          maximum: 100
+        riskCategory:
+          type: string
+          enum:
+          - VERY_LOW
+          - LOW
+          - MEDIUM
+          - HIGH
+          - VERY_HIGH
+        lastUpdated:
+          type: string
+          format: date-time
+        contributingFactors:
+          type: array
+          items:
+            type: object
+            properties:
+              factor:
+                type: string
+              contribution:
+                type: number
+        activeFraudCases:
+          type: integer
+        historicalFraudFlags:
+          type: integer
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

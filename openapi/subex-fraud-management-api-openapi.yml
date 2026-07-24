@@ -1,0 +1,246 @@
+openapi: 3.1.0
+info:
+  title: Subex Revenue Assurance & Analytics Fraud Management API
+  description: Subex provides revenue assurance and fraud management APIs for telecom operators. APIs enable revenue leakage detection, usage reconciliation, interconnect billing verification, fraud analytics, and subscriber risk scoring across voice, data, and digital services. Subex ROC (Revenue Operations Center) is the primary platform.
+  version: '1.0'
+  contact:
+    name: Subex Support
+    url: https://www.subex.com/contact-us/
+  license:
+    name: Subex License Agreement
+    url: https://www.subex.com/privacy-policy/
+servers:
+- url: https://api.subex.example.com/roc/v1
+  description: Subex ROC API (customer-hosted or cloud deployment)
+security:
+- BearerAuth: []
+tags:
+- name: Fraud Management
+  description: Fraud detection and case management
+paths:
+  /fraud/cases:
+    get:
+      operationId: listFraudCases
+      summary: List fraud cases
+      description: Returns fraud cases detected by Subex fraud analytics including SIM swap, bypass fraud, subscription fraud, and international revenue share fraud (IRSF).
+      tags:
+      - Fraud Management
+      parameters:
+      - name: fraudType
+        in: query
+        schema:
+          type: string
+          enum:
+          - SIM_SWAP
+          - BYPASS_FRAUD
+          - SUBSCRIPTION_FRAUD
+          - IRSF
+          - ROAMING_FRAUD
+          - INTERCONNECT_FRAUD
+          - WANGIRI
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - OPEN
+          - UNDER_INVESTIGATION
+          - CONFIRMED
+          - FALSE_POSITIVE
+          - CLOSED
+      - name: riskScore
+        in: query
+        description: Minimum risk score threshold (0-100)
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100
+      - name: startDate
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: endDate
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: page
+        in: query
+        schema:
+          type: integer
+          default: 0
+      - name: size
+        in: query
+        schema:
+          type: integer
+          default: 50
+      responses:
+        '200':
+          description: List of fraud cases
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FraudCaseListResponse'
+  /fraud/cases/{caseId}:
+    get:
+      operationId: getFraudCase
+      summary: Get fraud case details
+      description: Returns full details for a specific fraud case including evidence and timeline.
+      tags:
+      - Fraud Management
+      parameters:
+      - name: caseId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Fraud case details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FraudCase'
+        '404':
+          description: Not found
+  /fraud/subscribers/{msisdn}/risk-score:
+    get:
+      operationId: getSubscriberRiskScore
+      summary: Get subscriber risk score
+      description: Returns the current fraud risk score for a subscriber MSISDN based on behavioral analytics, call pattern analysis, and historical fraud indicators.
+      tags:
+      - Fraud Management
+      parameters:
+      - name: msisdn
+        in: path
+        required: true
+        description: Subscriber MSISDN (international format without +)
+        schema:
+          type: string
+        example: '14155552671'
+      responses:
+        '200':
+          description: Subscriber risk score
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriberRiskScore'
+components:
+  schemas:
+    FraudCase:
+      type: object
+      properties:
+        caseId:
+          type: string
+        fraudType:
+          type: string
+          enum:
+          - SIM_SWAP
+          - BYPASS_FRAUD
+          - SUBSCRIPTION_FRAUD
+          - IRSF
+          - ROAMING_FRAUD
+          - INTERCONNECT_FRAUD
+          - WANGIRI
+        status:
+          type: string
+          enum:
+          - OPEN
+          - UNDER_INVESTIGATION
+          - CONFIRMED
+          - FALSE_POSITIVE
+          - CLOSED
+        riskScore:
+          type: integer
+          minimum: 0
+          maximum: 100
+        detectedAt:
+          type: string
+          format: date-time
+        subscriberMsisdn:
+          type: string
+        imsi:
+          type: string
+        estimatedFraudLoss:
+          type: number
+        currency:
+          type: string
+          default: USD
+        indicators:
+          type: array
+          items:
+            type: object
+            properties:
+              indicatorName:
+                type: string
+              indicatorValue:
+                type: string
+              weight:
+                type: number
+        actions:
+          type: array
+          items:
+            type: object
+            properties:
+              actionType:
+                type: string
+                enum:
+                - BLOCK_SUBSCRIBER
+                - REDUCE_LIMIT
+                - FLAG_FOR_REVIEW
+                - NOTIFY_ANALYST
+              takenAt:
+                type: string
+                format: date-time
+              takenBy:
+                type: string
+    FraudCaseListResponse:
+      type: object
+      properties:
+        cases:
+          type: array
+          items:
+            $ref: '#/components/schemas/FraudCase'
+        totalCount:
+          type: integer
+        page:
+          type: integer
+    SubscriberRiskScore:
+      type: object
+      properties:
+        msisdn:
+          type: string
+        riskScore:
+          type: integer
+          minimum: 0
+          maximum: 100
+        riskCategory:
+          type: string
+          enum:
+          - VERY_LOW
+          - LOW
+          - MEDIUM
+          - HIGH
+          - VERY_HIGH
+        lastUpdated:
+          type: string
+          format: date-time
+        contributingFactors:
+          type: array
+          items:
+            type: object
+            properties:
+              factor:
+                type: string
+              contribution:
+                type: number
+        activeFraudCases:
+          type: integer
+        historicalFraudFlags:
+          type: integer
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
