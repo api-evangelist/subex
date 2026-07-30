@@ -1,26 +1,72 @@
 aid: subex
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/subex.png
 url: https://raw.githubusercontent.com/api-evangelist/subex/refs/heads/main/apis.yml
 apis:
-  - aid: subex:subex-revenue-assurance-api
-    name: Subex Revenue Assurance & Fraud Management API
-    tags:
-      - Revenue Assurance
-      - Fraud Management
-      - CDR Reconciliation
-      - Analytics
-      - Telecom
-    humanURL: https://www.subex.com/roc/
-    properties:
-      - url: https://www.subex.com/roc/
-        type: Documentation
-      - url: https://www.subex.com/contact-us/
-        type: Contact
-      - url: openapi/subex-revenue-assurance-openapi.yml
-        type: OpenAPI
-    description: >-
-      Subex ROC (Revenue Operations Center) API for telecom operators. Provides revenue leakage detection and
-      management, fraud case investigation, subscriber risk scoring, CDR reconciliation, and analytics across voice,
-      data, roaming, and digital services.
+- aid: subex:subex-analytics-api
+  name: Subex Analytics API
+  description: Risk analytics and reporting
+  humanURL: https://www.subex.com/roc/
+  tags:
+  - Analytics
+  properties:
+  - type: OpenAPI
+    url: openapi/subex-analytics-api-openapi.yml
+  - type: Documentation
+    url: https://www.subex.com/roc/
+  - type: Contact
+    url: https://www.subex.com/contact-us/
+- aid: subex:subex-fraud-management-api
+  name: Subex Fraud Management API
+  description: Fraud detection and case management
+  humanURL: https://www.subex.com/roc/
+  tags:
+  - Fraud Management
+  properties:
+  - type: OpenAPI
+    url: openapi/subex-fraud-management-api-openapi.yml
+  - type: Documentation
+    url: https://www.subex.com/roc/
+  - type: Contact
+    url: https://www.subex.com/contact-us/
+- aid: subex:subex-reconciliation-api
+  name: Subex Reconciliation API
+  description: CDR and billing data reconciliation
+  humanURL: https://www.subex.com/roc/
+  tags:
+  - Reconciliation
+  properties:
+  - type: OpenAPI
+    url: openapi/subex-reconciliation-api-openapi.yml
+  - type: Documentation
+    url: https://www.subex.com/roc/
+  - type: Contact
+    url: https://www.subex.com/contact-us/
+- aid: subex:subex-revenue-assurance-api
+  name: Subex Revenue Assurance API
+  description: Revenue leakage detection and reconciliation
+  humanURL: https://www.subex.com/roc/
+  tags:
+  - Revenue Assurance
+  properties:
+  - type: OpenAPI
+    url: openapi/subex-revenue-assurance-api-openapi.yml
+  - type: Documentation
+    url: https://www.subex.com/roc/
+  - type: Contact
+    url: https://www.subex.com/contact-us/
 name: Subex
 tags:
   - Telecom
