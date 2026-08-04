@@ -1,0 +1,20 @@
+{
+  "provider": "subex",
+  "sources": [
+    "subex-analytics-api-openapi.yml",
+    "subex-fraud-management-api-openapi.yml",
+    "subex-reconciliation-api-openapi.yml",
+    "subex-revenue-assurance-api-openapi.yml"
+  ],
+  "outputs": [
+    "subex-analytics-api-openapi.yml",
+    "subex-fraud-management-api-openapi.yml",
+    "subex-reconciliation-api-openapi.yml",
+    "subex-revenue-assurance-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
