@@ -1,0 +1,434 @@
+{
+  "item": [
+    {
+      "id": "fc4f90ce-1184-41b4-8497-929e44b2a40f",
+      "name": "Fraud Management",
+      "description": {
+        "content": "Fraud detection and case management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8216e94e-02a2-45f0-b31b-673802e9165f",
+          "name": "List fraud cases",
+          "request": {
+            "name": "List fraud cases",
+            "description": {
+              "content": "Returns fraud cases detected by Subex fraud analytics including SIM swap, bypass fraud, subscription fraud, and international revenue share fraud (IRSF).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fraud",
+                "cases"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fraudType",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "riskScore",
+                  "value": "<integer>",
+                  "description": "Minimum risk score threshold (0-100)"
+                },
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "50"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fa3df5dd-cd51-4395-b5f2-0f805bdab8bf",
+              "name": "List of fraud cases",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fraud",
+                    "cases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fraudType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "riskScore",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "size",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cases\": [\n    {\n      \"caseId\": \"string\",\n      \"fraudType\": \"WANGIRI\",\n      \"status\": \"FALSE_POSITIVE\",\n      \"riskScore\": 61,\n      \"detectedAt\": \"1992-03-08T19:51:39.760Z\",\n      \"subscriberMsisdn\": \"string\",\n      \"imsi\": \"string\",\n      \"estimatedFraudLoss\": 9055.22153421001,\n      \"currency\": \"USD\",\n      \"indicators\": [\n        {\n          \"indicatorName\": \"string\",\n          \"indicatorValue\": \"string\",\n          \"weight\": 7092.219133586432\n        },\n        {\n          \"indicatorName\": \"string\",\n          \"indicatorValue\": \"string\",\n          \"weight\": 1217.3955318333096\n        }\n      ],\n      \"actions\": [\n        {\n          \"actionType\": \"FLAG_FOR_REVIEW\",\n          \"takenAt\": \"2004-09-05T09:44:05.345Z\",\n          \"takenBy\": \"string\"\n        },\n        {\n          \"actionType\": \"FLAG_FOR_REVIEW\",\n          \"takenAt\": \"1956-11-23T02:15:09.339Z\",\n          \"takenBy\": \"string\"\n        }\n      ]\n    },\n    {\n      \"caseId\": \"string\",\n      \"fraudType\": \"BYPASS_FRAUD\",\n      \"status\": \"FALSE_POSITIVE\",\n      \"riskScore\": 91,\n      \"detectedAt\": \"1971-05-24T07:36:49.079Z\",\n      \"subscriberMsisdn\": \"string\",\n      \"imsi\": \"string\",\n      \"estimatedFraudLoss\": 4186.091206805955,\n      \"currency\": \"USD\",\n      \"indicators\": [\n        {\n          \"indicatorName\": \"string\",\n          \"indicatorValue\": \"string\",\n          \"weight\": 36.1727235265552\n        },\n        {\n          \"indicatorName\": \"string\",\n          \"indicatorValue\": \"string\",\n          \"weight\": 2794.2473721691554\n        }\n      ],\n      \"actions\": [\n        {\n          \"actionType\": \"FLAG_FOR_REVIEW\",\n          \"takenAt\": \"2003-03-15T02:53:41.498Z\",\n          \"takenBy\": \"string\"\n        },\n        {\n          \"actionType\": \"NOTIFY_ANALYST\",\n          \"takenAt\": \"1956-09-13T21:50:35.249Z\",\n          \"takenBy\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"totalCount\": 9671,\n  \"page\": 2805\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0afb86db-dfa8-4cfd-ba07-66b72224f82f",
+          "name": "Get fraud case details",
+          "request": {
+            "name": "Get fraud case details",
+            "description": {
+              "content": "Returns full details for a specific fraud case including evidence and timeline.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fraud",
+                "cases",
+                ":caseId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "caseId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "366e10ff-1816-44c2-a688-89460b2b38d2",
+              "name": "Fraud case details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fraud",
+                    "cases",
+                    ":caseId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "caseId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"caseId\": \"string\",\n  \"fraudType\": \"BYPASS_FRAUD\",\n  \"status\": \"FALSE_POSITIVE\",\n  \"riskScore\": 67,\n  \"detectedAt\": \"2022-02-15T15:47:14.572Z\",\n  \"subscriberMsisdn\": \"string\",\n  \"imsi\": \"string\",\n  \"estimatedFraudLoss\": 1476.845706902007,\n  \"currency\": \"USD\",\n  \"indicators\": [\n    {\n      \"indicatorName\": \"string\",\n      \"indicatorValue\": \"string\",\n      \"weight\": 7750.219613595798\n    },\n    {\n      \"indicatorName\": \"string\",\n      \"indicatorValue\": \"string\",\n      \"weight\": 5031.079011124051\n    }\n  ],\n  \"actions\": [\n    {\n      \"actionType\": \"FLAG_FOR_REVIEW\",\n      \"takenAt\": \"1987-09-09T01:07:11.875Z\",\n      \"takenBy\": \"string\"\n    },\n    {\n      \"actionType\": \"BLOCK_SUBSCRIBER\",\n      \"takenAt\": \"1951-06-20T15:27:50.452Z\",\n      \"takenBy\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a61ca413-0e97-487b-b350-2f1a0dd94bea",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fraud",
+                    "cases",
+                    ":caseId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "caseId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8636b1a8-a85f-446b-9b88-5c5e53677035",
+          "name": "Get subscriber risk score",
+          "request": {
+            "name": "Get subscriber risk score",
+            "description": {
+              "content": "Returns the current fraud risk score for a subscriber MSISDN based on behavioral analytics, call pattern analysis, and historical fraud indicators.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fraud",
+                "subscribers",
+                ":msisdn",
+                "risk-score"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "msisdn",
+                  "description": "(Required) Subscriber MSISDN (international format without +)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4fa9ad01-7aa4-4a26-b29d-d8590afdbf8a",
+              "name": "Subscriber risk score",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fraud",
+                    "subscribers",
+                    ":msisdn",
+                    "risk-score"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "msisdn",
+                      "description": "(Required) Subscriber MSISDN (international format without +)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"msisdn\": \"string\",\n  \"riskScore\": 58,\n  \"riskCategory\": \"VERY_LOW\",\n  \"lastUpdated\": \"1999-08-28T00:14:01.076Z\",\n  \"contributingFactors\": [\n    {\n      \"factor\": \"string\",\n      \"contribution\": 4937.407494944211\n    },\n    {\n      \"factor\": \"string\",\n      \"contribution\": 1431.6583305473562\n    }\n  ],\n  \"activeFraudCases\": 8605,\n  \"historicalFraudFlags\": 4218\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.subex.example.com/roc/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6983714e-3d60-48c4-ae94-f3de5cc586b8",
+    "name": "Subex Revenue Assurance & Analytics Fraud Management API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Subex provides revenue assurance and fraud management APIs for telecom operators. APIs enable revenue leakage detection, usage reconciliation, interconnect billing verification, fraud analytics, and subscriber risk scoring across voice, data, and digital services. Subex ROC (Revenue Operations Center) is the primary platform.\n\nContact Support:\n Name: Subex Support",
+      "type": "text/plain"
+    }
+  }
+}

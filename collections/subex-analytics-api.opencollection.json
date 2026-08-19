@@ -1,0 +1,67 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Subex Revenue Assurance & Fraud Management Analytics API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Analytics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get subscriber risk score",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.subex.example.com/roc/v1/fraud/subscribers/:msisdn/risk-score",
+            "params": [
+              {
+                "name": "msisdn",
+                "value": "14155552671",
+                "type": "path",
+                "description": "Subscriber MSISDN (international format without +)"
+              }
+            ]
+          },
+          "docs": "Returns the current fraud risk score for a subscriber MSISDN based on behavioral analytics, call pattern analysis, and historical fraud indicators."
+        },
+        {
+          "info": {
+            "name": "Get revenue assurance analytics summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.subex.example.com/roc/v1/analytics/summary",
+            "params": [
+              {
+                "name": "period",
+                "value": "MONTHLY",
+                "type": "query"
+              },
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "Period reference date"
+              }
+            ]
+          },
+          "docs": "Returns aggregated metrics on revenue leakage, fraud losses, and recovery amounts for a specified period."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

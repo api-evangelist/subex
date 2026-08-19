@@ -1,0 +1,159 @@
+{
+  "item": [
+    {
+      "id": "93f101f7-89c1-4dc3-aed7-2d75158d1023",
+      "name": "Reconciliation",
+      "description": {
+        "content": "CDR and billing data reconciliation",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8c4163f3-cd17-4e71-9017-e139343b668f",
+          "name": "List reconciliation runs",
+          "request": {
+            "name": "List reconciliation runs",
+            "description": {
+              "content": "Returns reconciliation run history for CDR and billing data matching.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "reconciliation",
+                "runs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "runType",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "51f4d4f1-9f08-435e-b5d5-0a04bbac81f9",
+              "name": "Reconciliation run list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reconciliation",
+                    "runs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "runType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"runs\": [\n    {\n      \"runId\": \"string\",\n      \"runType\": \"string\",\n      \"startTime\": \"2001-07-19T15:24:17.648Z\",\n      \"endTime\": \"1948-06-09T18:51:20.610Z\",\n      \"status\": \"COMPLETED\",\n      \"totalRecordsProcessed\": 2693,\n      \"matchedRecords\": 8960,\n      \"unmatchedRecords\": 877,\n      \"matchRate\": 1282.4850565183776,\n      \"leakageAlerts\": 993\n    },\n    {\n      \"runId\": \"string\",\n      \"runType\": \"string\",\n      \"startTime\": \"1946-10-21T20:28:56.004Z\",\n      \"endTime\": \"1998-02-16T12:33:32.259Z\",\n      \"status\": \"CANCELLED\",\n      \"totalRecordsProcessed\": 8604,\n      \"matchedRecords\": 2830,\n      \"unmatchedRecords\": 3700,\n      \"matchRate\": 7247.385202484585,\n      \"leakageAlerts\": 7754\n    }\n  ],\n  \"totalCount\": 144\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.subex.example.com/roc/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "13a88771-385c-499d-8163-329e0c25d139",
+    "name": "Subex Revenue Assurance & Fraud Management Analytics Reconciliation API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Subex provides revenue assurance and fraud management APIs for telecom operators. APIs enable revenue leakage detection, usage reconciliation, interconnect billing verification, fraud analytics, and subscriber risk scoring across voice, data, and digital services. Subex ROC (Revenue Operations Center) is the primary platform.\n\nContact Support:\n Name: Subex Support",
+      "type": "text/plain"
+    }
+  }
+}

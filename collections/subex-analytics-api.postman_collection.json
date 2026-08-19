@@ -1,0 +1,243 @@
+{
+  "item": [
+    {
+      "id": "a341d5a3-cbf8-4730-833a-75cf8abd559a",
+      "name": "Analytics",
+      "description": {
+        "content": "Risk analytics and reporting",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "62d3072b-7661-428e-9584-74d631bea0e9",
+          "name": "Get subscriber risk score",
+          "request": {
+            "name": "Get subscriber risk score",
+            "description": {
+              "content": "Returns the current fraud risk score for a subscriber MSISDN based on behavioral analytics, call pattern analysis, and historical fraud indicators.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fraud",
+                "subscribers",
+                ":msisdn",
+                "risk-score"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "msisdn",
+                  "description": "(Required) Subscriber MSISDN (international format without +)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a28c0364-ed54-4799-933c-7d84f9cac9a5",
+              "name": "Subscriber risk score",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fraud",
+                    "subscribers",
+                    ":msisdn",
+                    "risk-score"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "msisdn",
+                      "description": "(Required) Subscriber MSISDN (international format without +)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"msisdn\": \"string\",\n  \"riskScore\": 35,\n  \"riskCategory\": \"VERY_LOW\",\n  \"lastUpdated\": \"2024-03-25T13:46:18.196Z\",\n  \"contributingFactors\": [\n    {\n      \"factor\": \"string\",\n      \"contribution\": 6330.5211734871355\n    },\n    {\n      \"factor\": \"string\",\n      \"contribution\": 9759.584260410016\n    }\n  ],\n  \"activeFraudCases\": 6064,\n  \"historicalFraudFlags\": 9626\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "991f57e8-361b-478c-96bd-3ed61e62659d",
+          "name": "Get revenue assurance analytics summary",
+          "request": {
+            "name": "Get revenue assurance analytics summary",
+            "description": {
+              "content": "Returns aggregated metrics on revenue leakage, fraud losses, and recovery amounts for a specified period.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "analytics",
+                "summary"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "period",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "<date>",
+                  "description": "(Required) Period reference date"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "77ac5bd8-1650-4ef4-afc4-99ff4361605e",
+              "name": "Analytics summary",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "period",
+                      "value": "MONTHLY"
+                    },
+                    {
+                      "key": "date",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"period\": \"string\",\n  \"periodStart\": \"2012-12-26\",\n  \"periodEnd\": \"2013-02-25\",\n  \"totalRevenue\": 264.53999431786724,\n  \"leakageDetected\": 7909.838575144551,\n  \"leakageRecovered\": 431.3545934619545,\n  \"leakageRate\": 3973.2903049879887,\n  \"fraudLossDetected\": 9880.892791804265,\n  \"fraudLossPrevented\": 6405.626024206059,\n  \"openAlerts\": 449,\n  \"resolvedAlerts\": 9725,\n  \"currency\": \"USD\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.subex.example.com/roc/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "14b6d0a0-831c-424a-b3e0-deb9294102f3",
+    "name": "Subex Revenue Assurance & Fraud Management Analytics API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Subex provides revenue assurance and fraud management APIs for telecom operators. APIs enable revenue leakage detection, usage reconciliation, interconnect billing verification, fraud analytics, and subscriber risk scoring across voice, data, and digital services. Subex ROC (Revenue Operations Center) is the primary platform.\n\nContact Support:\n Name: Subex Support",
+      "type": "text/plain"
+    }
+  }
+}

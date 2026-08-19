@@ -1,0 +1,112 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Subex & Fraud Management Analytics Revenue Assurance API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Revenue Assurance",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List revenue leakage alerts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.subex.example.com/roc/v1/revenue-assurance/leakages",
+            "params": [
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "leakageType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "severity",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns detected revenue leakage alerts across all monitored service streams including voice, data, roaming, and digital services. Supports filtering by leakage type, severity, date range, and resolution status."
+        },
+        {
+          "info": {
+            "name": "Get leakage alert details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.subex.example.com/roc/v1/revenue-assurance/leakages/:leakageId",
+            "params": [
+              {
+                "name": "leakageId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns detailed information for a specific revenue leakage alert."
+        },
+        {
+          "info": {
+            "name": "Update leakage alert status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.subex.example.com/roc/v1/revenue-assurance/leakages/:leakageId",
+            "params": [
+              {
+                "name": "leakageId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the status and resolution notes for a leakage alert."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

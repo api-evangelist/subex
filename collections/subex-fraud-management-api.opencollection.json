@@ -1,0 +1,110 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Subex Revenue Assurance & Analytics Fraud Management API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Fraud Management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List fraud cases",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.subex.example.com/roc/v1/fraud/cases",
+            "params": [
+              {
+                "name": "fraudType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "riskScore",
+                "value": "",
+                "type": "query",
+                "description": "Minimum risk score threshold (0-100)"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns fraud cases detected by Subex fraud analytics including SIM swap, bypass fraud, subscription fraud, and international revenue share fraud (IRSF)."
+        },
+        {
+          "info": {
+            "name": "Get fraud case details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.subex.example.com/roc/v1/fraud/cases/:caseId",
+            "params": [
+              {
+                "name": "caseId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns full details for a specific fraud case including evidence and timeline."
+        },
+        {
+          "info": {
+            "name": "Get subscriber risk score",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.subex.example.com/roc/v1/fraud/subscribers/:msisdn/risk-score",
+            "params": [
+              {
+                "name": "msisdn",
+                "value": "14155552671",
+                "type": "path",
+                "description": "Subscriber MSISDN (international format without +)"
+              }
+            ]
+          },
+          "docs": "Returns the current fraud risk score for a subscriber MSISDN based on behavioral analytics, call pattern analysis, and historical fraud indicators."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
