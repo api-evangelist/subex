@@ -1,0 +1,44 @@
+slug: subex
+provider: Subex
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Telecommunications
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 3
+edges:
+- tag: Revenue Assurance
+  spec_file: subex-revenue-assurance-api-openapi.yml
+  capability_id: BC-2660.60
+  capability_id_l1: BC-2660
+  capability_name: Revenue Assurance Management
+  confidence: 0.92
+  evidence: GET /revenue-assurance/leakages  listLeakageAlerts  List revenue leakage alerts
+  reason: Operations list, inspect and update revenue leakage alerts — the definition of detection, quantification
+    and remediation of revenue leakage in a telecom revenue chain.
+- tag: Fraud Management
+  spec_file: subex-fraud-management-api-openapi.yml
+  capability_id: BC-2690.20
+  capability_id_l1: BC-2690
+  capability_name: Telecom Fraud Investigation
+  confidence: 0.72
+  evidence: GET /fraud/cases  listFraudCases  List fraud cases ... GET /fraud/subscribers/{msisdn}/risk-score
+  reason: Telecom fraud casework surface (fraud cases keyed by MSISDN, subscriber risk scoring) on a telecom
+    fraud-management platform; case listing/detail indicates investigation casework, with some overlap
+    into detection.
+- tag: Reconciliation
+  spec_file: subex-reconciliation-api-openapi.yml
+  capability_id: BC-2660.60
+  capability_id_l1: BC-2660
+  capability_name: Revenue Assurance Management
+  confidence: 0.7
+  evidence: GET /reconciliation/runs  listReconciliationRuns  List reconciliation runs
+  reason: Reconciliation runs in a platform whose description states APIs 'enable revenue leakage detection,
+    usage reconciliation, interconnect billing verification' — this is telecom revenue assurance reconciliation,
+    not general ledger reconciliation.
