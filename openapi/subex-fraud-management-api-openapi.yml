@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Subex Revenue Assurance & Analytics Fraud Management API
+  title: Subex Revenue Assurance Fraud Management API
   description: Subex provides revenue assurance and fraud management APIs for telecom operators. APIs enable revenue leakage detection, usage reconciliation, interconnect billing verification, fraud analytics, and subscriber risk scoring across voice, data, and digital services. Subex ROC (Revenue Operations Center) is the primary platform.
   version: '1.0'
   contact:
@@ -195,17 +195,6 @@ components:
                 format: date-time
               takenBy:
                 type: string
-    FraudCaseListResponse:
-      type: object
-      properties:
-        cases:
-          type: array
-          items:
-            $ref: '#/components/schemas/FraudCase'
-        totalCount:
-          type: integer
-        page:
-          type: integer
     SubscriberRiskScore:
       type: object
       properties:
@@ -238,6 +227,17 @@ components:
         activeFraudCases:
           type: integer
         historicalFraudFlags:
+          type: integer
+    FraudCaseListResponse:
+      type: object
+      properties:
+        cases:
+          type: array
+          items:
+            $ref: '#/components/schemas/FraudCase'
+        totalCount:
+          type: integer
+        page:
           type: integer
   securitySchemes:
     BearerAuth:

@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Subex Revenue Assurance & Fraud Management Analytics Reconciliation API
+  title: Subex Revenue Assurance & Fraud Management Reconciliation…
   description: Subex provides revenue assurance and fraud management APIs for telecom operators. APIs enable revenue leakage detection, usage reconciliation, interconnect billing verification, fraud analytics, and subscriber risk scoring across voice, data, and digital services. Subex ROC (Revenue Operations Center) is the primary platform.
   version: '1.0'
   contact:
