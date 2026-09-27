@@ -45,6 +45,8 @@ apis:
   description: Fraud detection and case management
   humanURL: https://www.subex.com/roc/
   tags:
+  - Fraud Prevention
+  tags_raw:
   - Fraud Management
   properties:
   - type: OpenAPI
@@ -81,6 +83,12 @@ apis:
     url: https://www.subex.com/contact-us/
 name: Subex
 tags:
+  - Telecommunications
+  - Revenue Assurance
+  - Fraud Prevention
+  - Analytics
+  - BSS/OSS
+tags_raw:
   - Telecom
   - Revenue Assurance
   - Fraud Management

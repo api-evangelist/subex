@@ -128,6 +128,50 @@ paths:
                 $ref: '#/components/schemas/SubscriberRiskScore'
 components:
   schemas:
+    SubscriberRiskScore:
+      type: object
+      properties:
+        msisdn:
+          type: string
+        riskScore:
+          type: integer
+          minimum: 0
+          maximum: 100
+        riskCategory:
+          type: string
+          enum:
+          - VERY_LOW
+          - LOW
+          - MEDIUM
+          - HIGH
+          - VERY_HIGH
+        lastUpdated:
+          type: string
+          format: date-time
+        contributingFactors:
+          type: array
+          items:
+            type: object
+            properties:
+              factor:
+                type: string
+              contribution:
+                type: number
+        activeFraudCases:
+          type: integer
+        historicalFraudFlags:
+          type: integer
+    FraudCaseListResponse:
+      type: object
+      properties:
+        cases:
+          type: array
+          items:
+            $ref: '#/components/schemas/FraudCase'
+        totalCount:
+          type: integer
+        page:
+          type: integer
     FraudCase:
       type: object
       properties:
@@ -195,50 +239,6 @@ components:
                 format: date-time
               takenBy:
                 type: string
-    SubscriberRiskScore:
-      type: object
-      properties:
-        msisdn:
-          type: string
-        riskScore:
-          type: integer
-          minimum: 0
-          maximum: 100
-        riskCategory:
-          type: string
-          enum:
-          - VERY_LOW
-          - LOW
-          - MEDIUM
-          - HIGH
-          - VERY_HIGH
-        lastUpdated:
-          type: string
-          format: date-time
-        contributingFactors:
-          type: array
-          items:
-            type: object
-            properties:
-              factor:
-                type: string
-              contribution:
-                type: number
-        activeFraudCases:
-          type: integer
-        historicalFraudFlags:
-          type: integer
-    FraudCaseListResponse:
-      type: object
-      properties:
-        cases:
-          type: array
-          items:
-            $ref: '#/components/schemas/FraudCase'
-        totalCount:
-          type: integer
-        page:
-          type: integer
   securitySchemes:
     BearerAuth:
       type: http
