@@ -128,6 +128,17 @@ paths:
                 $ref: '#/components/schemas/SubscriberRiskScore'
 components:
   schemas:
+    FraudCaseListResponse:
+      type: object
+      properties:
+        cases:
+          type: array
+          items:
+            $ref: '#/components/schemas/FraudCase'
+        totalCount:
+          type: integer
+        page:
+          type: integer
     SubscriberRiskScore:
       type: object
       properties:
@@ -160,17 +171,6 @@ components:
         activeFraudCases:
           type: integer
         historicalFraudFlags:
-          type: integer
-    FraudCaseListResponse:
-      type: object
-      properties:
-        cases:
-          type: array
-          items:
-            $ref: '#/components/schemas/FraudCase'
-        totalCount:
-          type: integer
-        page:
           type: integer
     FraudCase:
       type: object

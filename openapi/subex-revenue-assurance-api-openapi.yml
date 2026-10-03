@@ -145,21 +145,6 @@ paths:
                 $ref: '#/components/schemas/LeakageAlert'
 components:
   schemas:
-    LeakageAlertListResponse:
-      type: object
-      properties:
-        alerts:
-          type: array
-          items:
-            $ref: '#/components/schemas/LeakageAlert'
-        totalCount:
-          type: integer
-        totalEstimatedLoss:
-          type: number
-        page:
-          type: integer
-        pageSize:
-          type: integer
     LeakageAlert:
       type: object
       properties:
@@ -222,6 +207,21 @@ components:
           nullable: true
         resolutionNotes:
           type: string
+    LeakageAlertListResponse:
+      type: object
+      properties:
+        alerts:
+          type: array
+          items:
+            $ref: '#/components/schemas/LeakageAlert'
+        totalCount:
+          type: integer
+        totalEstimatedLoss:
+          type: number
+        page:
+          type: integer
+        pageSize:
+          type: integer
   securitySchemes:
     BearerAuth:
       type: http

@@ -76,6 +76,37 @@ paths:
                 $ref: '#/components/schemas/AnalyticsSummary'
 components:
   schemas:
+    AnalyticsSummary:
+      type: object
+      properties:
+        period:
+          type: string
+        periodStart:
+          type: string
+          format: date
+        periodEnd:
+          type: string
+          format: date
+        totalRevenue:
+          type: number
+        leakageDetected:
+          type: number
+        leakageRecovered:
+          type: number
+        leakageRate:
+          type: number
+          description: Leakage as percentage of total revenue
+        fraudLossDetected:
+          type: number
+        fraudLossPrevented:
+          type: number
+        openAlerts:
+          type: integer
+        resolvedAlerts:
+          type: integer
+        currency:
+          type: string
+          default: USD
     SubscriberRiskScore:
       type: object
       properties:
@@ -109,37 +140,6 @@ components:
           type: integer
         historicalFraudFlags:
           type: integer
-    AnalyticsSummary:
-      type: object
-      properties:
-        period:
-          type: string
-        periodStart:
-          type: string
-          format: date
-        periodEnd:
-          type: string
-          format: date
-        totalRevenue:
-          type: number
-        leakageDetected:
-          type: number
-        leakageRecovered:
-          type: number
-        leakageRate:
-          type: number
-          description: Leakage as percentage of total revenue
-        fraudLossDetected:
-          type: number
-        fraudLossPrevented:
-          type: number
-        openAlerts:
-          type: integer
-        resolvedAlerts:
-          type: integer
-        currency:
-          type: string
-          default: USD
   securitySchemes:
     BearerAuth:
       type: http
