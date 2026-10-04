@@ -128,17 +128,6 @@ paths:
                 $ref: '#/components/schemas/SubscriberRiskScore'
 components:
   schemas:
-    FraudCaseListResponse:
-      type: object
-      properties:
-        cases:
-          type: array
-          items:
-            $ref: '#/components/schemas/FraudCase'
-        totalCount:
-          type: integer
-        page:
-          type: integer
     SubscriberRiskScore:
       type: object
       properties:
@@ -239,6 +228,17 @@ components:
                 format: date-time
               takenBy:
                 type: string
+    FraudCaseListResponse:
+      type: object
+      properties:
+        cases:
+          type: array
+          items:
+            $ref: '#/components/schemas/FraudCase'
+        totalCount:
+          type: integer
+        page:
+          type: integer
   securitySchemes:
     BearerAuth:
       type: http
