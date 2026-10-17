@@ -64,15 +64,6 @@ paths:
                 $ref: '#/components/schemas/ReconciliationRunListResponse'
 components:
   schemas:
-    ReconciliationRunListResponse:
-      type: object
-      properties:
-        runs:
-          type: array
-          items:
-            $ref: '#/components/schemas/ReconciliationRun'
-        totalCount:
-          type: integer
     ReconciliationRun:
       type: object
       properties:
@@ -106,6 +97,15 @@ components:
         leakageAlerts:
           type: integer
           description: Number of leakage alerts generated
+    ReconciliationRunListResponse:
+      type: object
+      properties:
+        runs:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReconciliationRun'
+        totalCount:
+          type: integer
   securitySchemes:
     BearerAuth:
       type: http
