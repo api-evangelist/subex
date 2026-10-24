@@ -1,90 +1,300 @@
 {
+  "info": {
+    "_postman_id": "95336738-912e-42ff-b637-a5bb4ab7d12b",
+    "name": "Subex & Fraud Management Revenue Assurance API",
+    "description": "Subex provides revenue assurance and fraud management APIs for telecom operators. APIs enable revenue leakage detection, usage reconciliation, interconnect billing verification, fraud analytics, and subscriber risk scoring across voice, data, and digital services. Subex ROC (Revenue Operations Center) is the primary platform.\n\nContact Support:\n Name: Subex Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:45:49.000Z",
+    "updatedAt": "2026-10-22T01:45:49.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-95336738-912e-42ff-b637-a5bb4ab7d12b"
+  },
   "item": [
     {
-      "id": "f5251968-d1a0-4d3a-86e1-8837fdbf1d82",
-      "name": "Revenue Assurance",
-      "description": {
-        "content": "Revenue leakage detection and reconciliation",
-        "type": "text/plain"
-      },
+      "name": "revenue-assurance",
       "item": [
         {
-          "id": "e7e9ee72-53f9-4071-897c-76cd44fdf70c",
-          "name": "List revenue leakage alerts",
-          "request": {
-            "name": "List revenue leakage alerts",
-            "description": {
-              "content": "Returns detected revenue leakage alerts across all monitored service streams including voice, data, roaming, and digital services. Supports filtering by leakage type, severity, date range, and resolution status.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "revenue-assurance",
-                "leakages"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
+          "name": "leakages",
+          "item": [
+            {
+              "name": "{leakageId}",
+              "item": [
                 {
-                  "disabled": false,
-                  "key": "startDate",
-                  "value": "<date>"
+                  "name": "Get leakage alert details",
+                  "id": "61fe5e9c-649e-4977-bb0a-d66fe943e3b4",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/revenue-assurance/leakages/:leakageId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "revenue-assurance",
+                        "leakages",
+                        ":leakageId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "faae3b0d-f2fb-4673-9d38-4ae7f0cf635f",
+                          "key": "leakageId",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Returns detailed information for a specific revenue leakage alert."
+                  },
+                  "response": [
+                    {
+                      "id": "5812dd9c-ea67-42b7-ab7e-995c357b35bb",
+                      "name": "Leakage alert details",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/revenue-assurance/leakages/:leakageId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "revenue-assurance",
+                            "leakages",
+                            ":leakageId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "leakageId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"leakageId\": \"<string>\",\n  \"leakageType\": \"INTERCONNECT_LEAKAGE\",\n  \"severity\": \"LOW\",\n  \"status\": \"RESOLVED\",\n  \"detectedAt\": \"<dateTime>\",\n  \"serviceType\": \"DIGITAL\",\n  \"estimatedLoss\": \"<number>\",\n  \"currency\": \"USD\",\n  \"description\": \"<string>\",\n  \"affectedRecordCount\": \"<integer>\",\n  \"dataSource\": \"<string>\",\n  \"controlName\": \"<string>\",\n  \"assignedTo\": \"<string>\",\n  \"resolvedAt\": \"<dateTime>\",\n  \"resolutionNotes\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T01:45:49.000Z",
+                      "updatedAt": "2026-10-22T01:45:49.000Z",
+                      "uid": "35240-5812dd9c-ea67-42b7-ab7e-995c357b35bb"
+                    },
+                    {
+                      "id": "2ab3405c-af1c-4d20-a2a2-0e77b5b8d99c",
+                      "name": "Alert not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/revenue-assurance/leakages/:leakageId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "revenue-assurance",
+                            "leakages",
+                            ":leakageId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "leakageId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T01:45:49.000Z",
+                      "updatedAt": "2026-10-22T01:45:49.000Z",
+                      "uid": "35240-2ab3405c-af1c-4d20-a2a2-0e77b5b8d99c"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:45:49.000Z",
+                  "updatedAt": "2026-10-22T01:45:49.000Z",
+                  "uid": "35240-61fe5e9c-649e-4977-bb0a-d66fe943e3b4"
                 },
                 {
-                  "disabled": false,
-                  "key": "endDate",
-                  "value": "<date>"
-                },
-                {
-                  "disabled": false,
-                  "key": "leakageType",
-                  "value": "<string>"
-                },
-                {
-                  "disabled": false,
-                  "key": "severity",
-                  "value": "<string>"
-                },
-                {
-                  "disabled": false,
-                  "key": "status",
-                  "value": "<string>"
-                },
-                {
-                  "disabled": false,
-                  "key": "page",
-                  "value": "0"
-                },
-                {
-                  "disabled": false,
-                  "key": "size",
-                  "value": "50"
+                  "name": "Update leakage alert status",
+                  "id": "212ba80b-0eb3-4505-92ad-7bdcd1458bc0",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"status\": \"CLOSED\",\n  \"resolutionNotes\": \"<string>\",\n  \"assignedTo\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/revenue-assurance/leakages/:leakageId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "revenue-assurance",
+                        "leakages",
+                        ":leakageId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "a9ea5b4c-01c5-4029-8cca-b144d8d05100",
+                          "key": "leakageId",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Updates the status and resolution notes for a leakage alert."
+                  },
+                  "response": [
+                    {
+                      "id": "ac6d882e-52a8-40c4-ae64-3378a7166c82",
+                      "name": "Alert updated",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"status\": \"CLOSED\",\n  \"resolutionNotes\": \"<string>\",\n  \"assignedTo\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/revenue-assurance/leakages/:leakageId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "revenue-assurance",
+                            "leakages",
+                            ":leakageId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "leakageId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"leakageId\": \"<string>\",\n  \"leakageType\": \"INTERCONNECT_LEAKAGE\",\n  \"severity\": \"LOW\",\n  \"status\": \"RESOLVED\",\n  \"detectedAt\": \"<dateTime>\",\n  \"serviceType\": \"DIGITAL\",\n  \"estimatedLoss\": \"<number>\",\n  \"currency\": \"USD\",\n  \"description\": \"<string>\",\n  \"affectedRecordCount\": \"<integer>\",\n  \"dataSource\": \"<string>\",\n  \"controlName\": \"<string>\",\n  \"assignedTo\": \"<string>\",\n  \"resolvedAt\": \"<dateTime>\",\n  \"resolutionNotes\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T01:45:49.000Z",
+                      "updatedAt": "2026-10-22T01:45:49.000Z",
+                      "uid": "35240-ac6d882e-52a8-40c4-ae64-3378a7166c82"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:45:49.000Z",
+                  "updatedAt": "2026-10-22T01:45:49.000Z",
+                  "uid": "35240-212ba80b-0eb3-4505-92ad-7bdcd1458bc0"
                 }
               ],
-              "variable": []
+              "id": "a8ba1fb4-c97f-4475-913e-c9be1d4c84b2",
+              "createdAt": "2026-10-22T01:45:49.000Z",
+              "updatedAt": "2026-10-22T01:45:49.000Z",
+              "uid": "35240-a8ba1fb4-c97f-4475-913e-c9be1d4c84b2"
             },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
             {
-              "id": "5a37b7de-abd5-4d77-b948-3fc5724ff1ea",
-              "name": "List of revenue leakage alerts",
-              "originalRequest": {
+              "name": "List revenue leakage alerts",
+              "id": "62dbbf95-c701-454e-963b-422003f4142b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
                 "url": {
+                  "raw": "{{baseUrl}}/revenue-assurance/leakages?startDate=<date>&endDate=<date>&leakageType=BILLING_ERROR&severity=HIGH&status=RESOLVED&page=0&size=50",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "revenue-assurance",
                     "leakages"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
                   ],
                   "query": [
                     {
@@ -97,15 +307,15 @@
                     },
                     {
                       "key": "leakageType",
-                      "value": "<string>"
+                      "value": "BILLING_ERROR"
                     },
                     {
                       "key": "severity",
-                      "value": "<string>"
+                      "value": "HIGH"
                     },
                     {
                       "key": "status",
-                      "value": "<string>"
+                      "value": "RESOLVED"
                     },
                     {
                       "key": "page",
@@ -115,389 +325,164 @@
                       "key": "size",
                       "value": "50"
                     }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"alerts\": [\n    {\n      \"leakageId\": \"string\",\n      \"leakageType\": \"BILLING_ERROR\",\n      \"severity\": \"HIGH\",\n      \"status\": \"CLOSED\",\n      \"detectedAt\": \"2007-09-24T18:19:13.789Z\",\n      \"serviceType\": \"VOICE\",\n      \"estimatedLoss\": 9888.47430157907,\n      \"currency\": \"USD\",\n      \"description\": \"string\",\n      \"affectedRecordCount\": 3539,\n      \"dataSource\": \"string\",\n      \"controlName\": \"string\",\n      \"assignedTo\": \"string\",\n      \"resolvedAt\": \"1987-07-07T00:31:58.314Z\",\n      \"resolutionNotes\": \"string\"\n    },\n    {\n      \"leakageId\": \"string\",\n      \"leakageType\": \"PROVISIONING_MISMATCH\",\n      \"severity\": \"LOW\",\n      \"status\": \"RESOLVED\",\n      \"detectedAt\": \"2011-05-21T23:35:38.920Z\",\n      \"serviceType\": \"ROAMING\",\n      \"estimatedLoss\": 8683.778419526803,\n      \"currency\": \"USD\",\n      \"description\": \"string\",\n      \"affectedRecordCount\": 1489,\n      \"dataSource\": \"string\",\n      \"controlName\": \"string\",\n      \"assignedTo\": \"string\",\n      \"resolvedAt\": \"2001-03-07T09:23:39.487Z\",\n      \"resolutionNotes\": \"string\"\n    }\n  ],\n  \"totalCount\": 8144,\n  \"totalEstimatedLoss\": 4676.833286226028,\n  \"page\": 6806,\n  \"pageSize\": 4848\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "9e32f99f-9d30-4266-a046-1e7bd2150065",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "revenue-assurance",
-                    "leakages"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "startDate",
-                      "value": "<date>"
-                    },
-                    {
-                      "key": "endDate",
-                      "value": "<date>"
-                    },
-                    {
-                      "key": "leakageType",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "severity",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "status",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "page",
-                      "value": "0"
-                    },
-                    {
-                      "key": "size",
-                      "value": "50"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "554363b4-2d22-4b3e-a0ae-084aaf830864",
-          "name": "Get leakage alert details",
-          "request": {
-            "name": "Get leakage alert details",
-            "description": {
-              "content": "Returns detailed information for a specific revenue leakage alert.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "revenue-assurance",
-                "leakages",
-                ":leakageId"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "leakageId",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "d1fc3f5c-c1ea-49b1-97ed-cd26d7f6c90b",
-              "name": "Leakage alert details",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "revenue-assurance",
-                    "leakages",
-                    ":leakageId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "leakageId",
-                      "description": "(Required) "
-                    }
                   ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                "description": "Returns detected revenue leakage alerts across all monitored service streams including voice, data, roaming, and digital services. Supports filtering by leakage type, severity, date range, and resolution status."
               },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"leakageId\": \"string\",\n  \"leakageType\": \"ROAMING_LEAKAGE\",\n  \"severity\": \"MEDIUM\",\n  \"status\": \"IN_PROGRESS\",\n  \"detectedAt\": \"1955-03-17T11:52:39.013Z\",\n  \"serviceType\": \"INTERCONNECT\",\n  \"estimatedLoss\": 3487.2923666784295,\n  \"currency\": \"USD\",\n  \"description\": \"string\",\n  \"affectedRecordCount\": 2518,\n  \"dataSource\": \"string\",\n  \"controlName\": \"string\",\n  \"assignedTo\": \"string\",\n  \"resolvedAt\": \"1982-02-18T23:51:31.435Z\",\n  \"resolutionNotes\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "0957c4bf-6606-4825-93b8-73b614366832",
-              "name": "Alert not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "revenue-assurance",
-                    "leakages",
-                    ":leakageId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "leakageId",
-                      "description": "(Required) "
+                  "id": "3198c95b-49b7-4c56-a577-61a9a20015ea",
+                  "name": "List of revenue leakage alerts",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/revenue-assurance/leakages?startDate=<date>&endDate=<date>&leakageType=BILLING_ERROR&severity=HIGH&status=RESOLVED&page=0&size=50",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "revenue-assurance",
+                        "leakages"
+                      ],
+                      "query": [
+                        {
+                          "key": "startDate",
+                          "value": "<date>"
+                        },
+                        {
+                          "key": "endDate",
+                          "value": "<date>"
+                        },
+                        {
+                          "key": "leakageType",
+                          "value": "BILLING_ERROR"
+                        },
+                        {
+                          "key": "severity",
+                          "value": "HIGH"
+                        },
+                        {
+                          "key": "status",
+                          "value": "RESOLVED"
+                        },
+                        {
+                          "key": "page",
+                          "value": "0"
+                        },
+                        {
+                          "key": "size",
+                          "value": "50"
+                        }
+                      ]
                     }
-                  ]
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"alerts\": [\n    {\n      \"leakageId\": \"<string>\",\n      \"leakageType\": \"ROAMING_LEAKAGE\",\n      \"severity\": \"HIGH\",\n      \"status\": \"RESOLVED\",\n      \"detectedAt\": \"<dateTime>\",\n      \"serviceType\": \"DATA\",\n      \"estimatedLoss\": \"<number>\",\n      \"currency\": \"USD\",\n      \"description\": \"<string>\",\n      \"affectedRecordCount\": \"<integer>\",\n      \"dataSource\": \"<string>\",\n      \"controlName\": \"<string>\",\n      \"assignedTo\": \"<string>\",\n      \"resolvedAt\": \"<dateTime>\",\n      \"resolutionNotes\": \"<string>\"\n    },\n    {\n      \"leakageId\": \"<string>\",\n      \"leakageType\": \"BILLING_ERROR\",\n      \"severity\": \"MEDIUM\",\n      \"status\": \"RESOLVED\",\n      \"detectedAt\": \"<dateTime>\",\n      \"serviceType\": \"VOICE\",\n      \"estimatedLoss\": \"<number>\",\n      \"currency\": \"USD\",\n      \"description\": \"<string>\",\n      \"affectedRecordCount\": \"<integer>\",\n      \"dataSource\": \"<string>\",\n      \"controlName\": \"<string>\",\n      \"assignedTo\": \"<string>\",\n      \"resolvedAt\": \"<dateTime>\",\n      \"resolutionNotes\": \"<string>\"\n    }\n  ],\n  \"totalCount\": \"<integer>\",\n  \"totalEstimatedLoss\": \"<number>\",\n  \"page\": \"<integer>\",\n  \"pageSize\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-22T01:45:49.000Z",
+                  "updatedAt": "2026-10-22T01:45:49.000Z",
+                  "uid": "35240-3198c95b-49b7-4c56-a577-61a9a20015ea"
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
                 {
-                  "key": "Content-Type",
-                  "value": "text/plain"
+                  "id": "cfbb8a72-463c-494b-b0c3-b07bc7a5b4b6",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/revenue-assurance/leakages?startDate=<date>&endDate=<date>&leakageType=BILLING_ERROR&severity=HIGH&status=RESOLVED&page=0&size=50",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "revenue-assurance",
+                        "leakages"
+                      ],
+                      "query": [
+                        {
+                          "key": "startDate",
+                          "value": "<date>"
+                        },
+                        {
+                          "key": "endDate",
+                          "value": "<date>"
+                        },
+                        {
+                          "key": "leakageType",
+                          "value": "BILLING_ERROR"
+                        },
+                        {
+                          "key": "severity",
+                          "value": "HIGH"
+                        },
+                        {
+                          "key": "status",
+                          "value": "RESOLVED"
+                        },
+                        {
+                          "key": "page",
+                          "value": "0"
+                        },
+                        {
+                          "key": "size",
+                          "value": "50"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T01:45:49.000Z",
+                  "updatedAt": "2026-10-22T01:45:49.000Z",
+                  "uid": "35240-cfbb8a72-463c-494b-b0c3-b07bc7a5b4b6"
                 }
               ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
+              "createdAt": "2026-10-22T01:45:49.000Z",
+              "updatedAt": "2026-10-22T01:45:49.000Z",
+              "uid": "35240-62dbbf95-c701-454e-963b-422003f4142b"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "7b35b21d-be13-4666-992e-fad676692d50",
-          "name": "Update leakage alert status",
-          "request": {
-            "name": "Update leakage alert status",
-            "description": {
-              "content": "Updates the status and resolution notes for a leakage alert.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "revenue-assurance",
-                "leakages",
-                ":leakageId"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "leakageId",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PATCH",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"status\": \"<string>\",\n  \"resolutionNotes\": \"<string>\",\n  \"assignedTo\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "b8a289e8-50d6-4e06-a6d3-acb7341008cf",
-              "name": "Alert updated",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "revenue-assurance",
-                    "leakages",
-                    ":leakageId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "leakageId",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"status\": \"<string>\",\n  \"resolutionNotes\": \"<string>\",\n  \"assignedTo\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"leakageId\": \"string\",\n  \"leakageType\": \"ROAMING_LEAKAGE\",\n  \"severity\": \"MEDIUM\",\n  \"status\": \"IN_PROGRESS\",\n  \"detectedAt\": \"1955-03-17T11:52:39.013Z\",\n  \"serviceType\": \"INTERCONNECT\",\n  \"estimatedLoss\": 3487.2923666784295,\n  \"currency\": \"USD\",\n  \"description\": \"string\",\n  \"affectedRecordCount\": 2518,\n  \"dataSource\": \"string\",\n  \"controlName\": \"string\",\n  \"assignedTo\": \"string\",\n  \"resolvedAt\": \"1982-02-18T23:51:31.435Z\",\n  \"resolutionNotes\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "bdc9abd4-b331-454b-a8e4-cf14cf1886b5",
+          "createdAt": "2026-10-22T01:45:49.000Z",
+          "updatedAt": "2026-10-22T01:45:49.000Z",
+          "uid": "35240-bdc9abd4-b331-454b-a8e4-cf14cf1886b5"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.subex.example.com/roc/v1",
-      "key": "baseUrl"
+      "id": "61c8211a-ea04-4dc1-9da5-171564bdd7b0",
+      "createdAt": "2026-10-22T01:45:49.000Z",
+      "updatedAt": "2026-10-22T01:45:49.000Z",
+      "uid": "35240-61c8211a-ea04-4dc1-9da5-171564bdd7b0"
     }
   ],
   "auth": {
@@ -505,17 +490,15 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "17a88585-7eba-4b76-a3f8-fc4089e7f9b0",
-    "name": "Subex & Fraud Management Analytics Revenue Assurance API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Subex provides revenue assurance and fraud management APIs for telecom operators. APIs enable revenue leakage detection, usage reconciliation, interconnect billing verification, fraud analytics, and subscriber risk scoring across voice, data, and digital services. Subex ROC (Revenue Operations Center) is the primary platform.\n\nContact Support:\n Name: Subex Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.subex.example.com/roc/v1"
     }
-  }
+  ]
 }
